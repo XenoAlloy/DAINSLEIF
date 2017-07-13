@@ -23,7 +23,7 @@ void Main()
 		void move_pattern() {
 		}
 	};
-
+	Player player;
 
 	while (System::Update())
 	{
@@ -31,16 +31,7 @@ void Main()
 			void updateEnemy(); {
 			}
 			void updatePlayer(); {
-				int dirX(Input::KeyRight.pressed - Input::KeyLeft.pressed);
-				int dirY(Input::KeyDown.pressed - Input::KeyUp.pressed);
-				player.positionX += dirX * 6;
-				player.positionY += dirY * 6;
-				if (Input::KeyShift.pressed == 1) {
-					player.positionX -= dirX * 4;
-					player.positionY -= dirY * 4;
-				}
-
-
+				player.update_move();
 			}
 			void updateEneBullet(); {
 			}
@@ -85,14 +76,14 @@ void Main()
 					}
 				}
 				if (Gamemode >= 1) {
-					if (menuExtend <= 370)
+					if (menuExtend < 380)
 					{
-						menuExtend += 37;
+						menuExtend += 38;
 					}
 				}
-				else if (menuExtend >= 0)
+				else if (menuExtend > 0)
 				{
-					menuExtend -= 37;
+					menuExtend -= 38;
 				}
 			}
 		}

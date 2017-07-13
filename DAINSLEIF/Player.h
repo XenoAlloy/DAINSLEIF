@@ -7,10 +7,11 @@ class Player
 	int EquipBulletA = 0;
 	int Speed = 6;
 	int ShiftDownSpeed = 4;
-	int PositionX = 230;
+	int PositionX = 210;
 	int PositionY = 500;
 	int DirX;
 	int DirY;
+	int Size = 6;
 
 public:
 
