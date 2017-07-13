@@ -1,5 +1,5 @@
 ﻿# include <Siv3D.hpp>
-
+# include "Player.h"
 void Main()
 {
 	Window::SetTitle(L"DAINSLEIF");
@@ -9,6 +9,8 @@ void Main()
 
 	const Font fontMin(14);
 
+
+
 	//メニュー関連
 	const Rect rect(0, 0, 800, 600);
 	const Rect menuBar(0, 0, 800, 30);
@@ -17,18 +19,12 @@ void Main()
 	int menuExtend = 0;
 	Point moPos = Mouse::Pos();
 
-	class Player {
-	public:
-		int positionX = 230;
-		int positionY = 500;
-		void draw() {
-			Triangle(
-			{ positionX , positionY - 60 },
-			{ positionX + 40 , positionY + 20 },
-			{ positionX - 40 , positionY + 20 }
-			).draw(Color(0, 255, 200, 255));
+	class StraightWeapon{
+		void move_pattern() {
 		}
-	}player;
+	};
+
+
 	while (System::Update())
 	{
 		void updateGame(); {
