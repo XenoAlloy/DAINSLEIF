@@ -36,5 +36,5 @@ void Player::draw() {
 }
 
 void Player::shot() {
-	GameManager::get_instance().bullets.push_back(Bullet([](Bullet c) { return []() {return Vec2(); }; }));
+	GameManager::get_instance().bullets.push_back(Bullet( [](Bullet c){ return Vec2(); } ));
 }

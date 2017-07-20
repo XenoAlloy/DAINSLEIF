@@ -4,10 +4,10 @@
 class Bullet
 {
 	int power;
-	std::function<Vec2()> move;
+	std::function<Vec2(const Bullet &)> move;
 
 public:
-	Bullet(std::function<std::function<Vec2()>(const Bullet&)>);
+	Bullet(std::function<Vec2(const Bullet&)>);
 	~Bullet();
 };
 
