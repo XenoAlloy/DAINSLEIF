@@ -66,6 +66,8 @@ void Main()
 				}
 
 
+				//ゲームモード変更時の画面の変更
+				//今はSキーに振ってある
 				if (Input::KeyS.clicked) {
 					if (Gamemode == 0)
 					{
