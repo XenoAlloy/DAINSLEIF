@@ -6,7 +6,7 @@ Bullet::Bullet(Vec2 _position, std::function<Vec2(const Bullet&)> _move_pattern,
 
 
 void Bullet::update() {
-	move(*this);
+	position += move(*this);
 
 }
 

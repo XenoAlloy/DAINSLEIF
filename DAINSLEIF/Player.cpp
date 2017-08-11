@@ -42,8 +42,9 @@ void Player::shot() {
 			Bullet(
 				position - Vec2{0, 16},
 				//[]余計な変数（ローカルなもの、λ式がつくられた所の変数）を使わない
-				[](Bullet b) { return Vec2(); },
-				[](Bullet b) { Circle(b.position,6).draw(Color(0, 255, 200, 255)); }
+				[](const Bullet& b) { return Vec2{0,-4}; },
+				// b の中身が変わっていないことを確約、&でbを参照だけする（constないと書き換え参照）
+				[](const Bullet& b) { Circle(b.position,6).draw(Color(0, 255, 200, 255)); }
 		));
 	}
 	
