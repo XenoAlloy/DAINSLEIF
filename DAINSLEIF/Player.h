@@ -3,12 +3,11 @@
 
 class Player
 {
+	Vec2 position = {210,500};
 	int EquipWeaponA = 0;
 	int EquipBulletA = 0;
 	int Speed = 6;
 	int ShiftDownSpeed = 4;
-	int PositionX = 210;
-	int PositionY = 500;
 	int DirX;
 	int DirY;
 	int Size = 6;

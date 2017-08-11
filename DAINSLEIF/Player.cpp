@@ -11,31 +11,40 @@ Player::~Player()
 {
 }
 void Player::update_move() {
-	int DirX(Input::KeyRight.pressed - Input::KeyLeft.pressed);
-	int DirY(Input::KeyDown.pressed - Input::KeyUp.pressed);
-	PositionX += DirX * 6;
-	PositionY += DirY * 6;
+	int DirX(Input::KeyD.pressed - Input::KeyA.pressed);
+	int DirY(Input::KeyS.pressed - Input::KeyW.pressed);
+	position.x += DirX * 6;
+	position.y += DirY * 6;
 	if (Input::KeyShift.pressed == 1) {
-		PositionX -= DirX * 4;
-		PositionY -= DirY * 4;
+		position.x -= DirX * 4;
+		position.y-= DirY * 4;
 	}
-	if (PositionX > 390-Size-4) {PositionX = 390 - Size - 4;}
-	if (PositionX < 30 + Size + 4) { PositionX = 30 + Size + 4; }
-	if (PositionY > 570 - Size - 4) { PositionY = 570 - Size - 4; }
-	if (PositionY < 30 + Size + 4) { PositionY = 30 + Size + 4; }
+	if (position.x > 390-Size-4) {position.x = 390 - Size - 4;}
+	if (position.x < 30 + Size + 4) { position.x = 30 + Size + 4; }
+	if (position.y > 570 - Size - 4) { position.y = 570 - Size - 4; }
+	if (position.y < 30 + Size + 4) { position.y = 30 + Size + 4; }
 
 }
 
 void Player::draw() {
 	Quad(
-	{ PositionX , PositionY - 20 },
-	{ PositionX + 8 , PositionY + 4 },
-	{ PositionX , PositionY + 16 },
-	{ PositionX - 8 , PositionY + 4 }
+	{ position.x , position.y - 20 },
+	{ position.x + 8 , position.y + 4 },
+	{ position.x , position.y + 16 },
+	{ position.x - 8 , position.y + 4 }
 	).draw(Color(0, 255, 200, 255));
 }
 
 void Player::shot() {
-
-	GameManager::get_instance().bullets.push_back(Bullet( [](Bullet c){ return Vec2(); } ));
+	if (Input::KeySpace.pressed)
+	{
+		GameManager::get_instance().bullets.push_back(
+			Bullet(
+				position,
+				//[]余計な変数（ローカルなもの、λ式がつくられた所の変数）を使わない
+				[](Bullet b) { return Vec2(); },
+				[](Bullet b) { Circle(b.position,40).draw(Color(0, 255, 200, 255)); }
+		));
+	}
+	
 }

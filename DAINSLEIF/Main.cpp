@@ -1,5 +1,6 @@
 ﻿# include <Siv3D.hpp>
 # include "Player.h"
+# include "GameManager.h"
 void Main()
 {
 	Window::SetTitle(L"DAINSLEIF");
@@ -25,6 +26,8 @@ void Main()
 	};
 	Player player;
 
+	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
+	GameManager&manager = GameManager::get_instance();
 	while (System::Update())
 	{
 		void updateGame(); {
@@ -36,6 +39,9 @@ void Main()
 			void updateEneBullet(); {
 			}
 			void updatePlaBullet(); {
+				for (auto& b : manager.bullets) {
+					b.update();
+				}
 			}
 			void updateWindow(); {
 				//closeをクリックで閉じる
@@ -68,7 +74,7 @@ void Main()
 
 				//ゲームモード変更時の画面の変更
 				//今はSキーに振ってある
-				if (Input::KeyS.clicked) {
+				if (Input::KeyE.clicked) {
 					if (Gamemode == 0)
 					{
 						Gamemode = 1;
@@ -99,6 +105,9 @@ void Main()
 			void drawEneBullet(); {
 			}
 			void drawPlaBullet(); {
+				for (auto& b : manager.bullets) {
+					b.draw(b);
+				}
 			}
 			void drawWindow(); {
 				rect.drawFrame(30, 0, Color(0, 0, 0));
