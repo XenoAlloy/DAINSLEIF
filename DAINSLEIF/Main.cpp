@@ -35,6 +35,7 @@ void Main()
 			}
 			void updatePlayer(); {
 				player.update_move();
+				player.shot();
 			}
 			void updateEneBullet(); {
 			}
@@ -73,7 +74,7 @@ void Main()
 
 
 				//ゲームモード変更時の画面の変更
-				//今はSキーに振ってある
+				//今はEキーに振ってある
 				if (Input::KeyE.clicked) {
 					if (Gamemode == 0)
 					{

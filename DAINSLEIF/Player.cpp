@@ -40,10 +40,10 @@ void Player::shot() {
 	{
 		GameManager::get_instance().bullets.push_back(
 			Bullet(
-				position,
+				position - Vec2{0, 16},
 				//[]余計な変数（ローカルなもの、λ式がつくられた所の変数）を使わない
 				[](Bullet b) { return Vec2(); },
-				[](Bullet b) { Circle(b.position,40).draw(Color(0, 255, 200, 255)); }
+				[](Bullet b) { Circle(b.position,6).draw(Color(0, 255, 200, 255)); }
 		));
 	}
 	
