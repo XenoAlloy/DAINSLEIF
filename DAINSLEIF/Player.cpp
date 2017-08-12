@@ -1,15 +1,16 @@
 #include "Player.h"
 #include "GameManager.h"
-
+#include "MovePattern.h"
+#include "DrawPattern.h"
 
 Player::Player()
-{
-}
-
+	: bullets_move(MovePattern::straight_up), bullets_draw(DrawPattern::circle) {}
 
 Player::~Player()
 {
 }
+
+
 void Player::update_move() {
 	int DirX(Input::KeyD.pressed - Input::KeyA.pressed);
 	int DirY(Input::KeyS.pressed - Input::KeyW.pressed);
@@ -39,13 +40,8 @@ void Player::shot() {
 	if (Input::KeySpace.pressed)
 	{
 		GameManager::get_instance().bullets.push_back(
-			Bullet(
-				position - Vec2{0, 16},
-				//[]余計な変数（ローカルなもの、λ式がつくられた所の変数）を使わない
-				[](const Bullet& b) { return Vec2{0,-4}; },
-				// b の中身が変わっていないことを確約、&でbを参照だけする（constないと書き換え参照）
-				[](const Bullet& b) { Circle(b.position,6).draw(Color(0, 255, 200, 255)); }
-		));
+			Bullet(position - Vec2{0, 16}, bullets_move, bullets_draw)
+		);
 	}
 	
 }

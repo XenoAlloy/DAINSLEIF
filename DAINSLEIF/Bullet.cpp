@@ -1,14 +1,17 @@
 #include "Bullet.h"
 
 
-Bullet::Bullet(Vec2 _position, std::function<Vec2(const Bullet&)> _move_pattern, std::function<void(const Bullet&)> _draw_pattern)
-	: position(_position), move(_move_pattern), draw(_draw_pattern) {}
+Bullet::Bullet(Vec2 position, std::function<Vec2(const Bullet&)> move_pattern, std::function<void(const Bullet&)> draw_pattern)
+	: position(position), _move(move_pattern), _draw(draw_pattern) {}
+
+Bullet::~Bullet() {}
 
 
 void Bullet::update() {
-	position += move(*this);
-
+	position += _move(*this);
 }
 
-
-Bullet::~Bullet(){}
+void Bullet::draw()
+{
+	_draw(*this);
+}

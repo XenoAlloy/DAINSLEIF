@@ -107,7 +107,7 @@ void Main()
 			}
 			void drawPlaBullet(); {
 				for (auto& b : manager.bullets) {
-					b.draw(b);
+					b.draw();
 				}
 			}
 			void drawWindow(); {

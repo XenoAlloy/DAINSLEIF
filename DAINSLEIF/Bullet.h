@@ -3,18 +3,20 @@
 
 class Bullet
 {
-	
-
 	int power;
-	std::function<Vec2(const Bullet &)> move;
+	Vec2 position;
 	
+	std::function<Vec2(const Bullet &)> _move;
+	std::function<void(const Bullet &)> _draw;
+	
+	friend class MovePattern;
+	friend class DrawPattern;
 
 public:
-	Vec2 position;
-
-	void update();
-	std::function<void(const Bullet &)> draw;
 	Bullet(Vec2, std::function<Vec2(const Bullet&)>, std::function<void(const Bullet&)>);
 	~Bullet();
+
+	void update();
+	void draw();
 };
 

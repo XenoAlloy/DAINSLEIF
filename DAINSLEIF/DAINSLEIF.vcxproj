@@ -163,8 +163,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="DrawPattern.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -281,7 +283,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="DrawPattern.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="MovePattern.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

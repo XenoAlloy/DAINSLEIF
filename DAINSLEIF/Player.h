@@ -1,5 +1,6 @@
 #pragma once
 #include<Siv3D.hpp>
+#include "Bullet.h"
 
 class Player
 {
@@ -11,6 +12,9 @@ class Player
 	int DirX;
 	int DirY;
 	int Size = 6;
+
+	std::function<Vec2(const Bullet &)> bullets_move;
+	std::function<void(const Bullet &)> bullets_draw;
 
 public:
 
