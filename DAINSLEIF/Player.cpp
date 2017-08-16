@@ -11,7 +11,7 @@ Player::~Player()
 }
 
 
-void Player::update_move() {
+void Player::move() {
 	int DirX(Input::KeyD.pressed - Input::KeyA.pressed);
 	int DirY(Input::KeyS.pressed - Input::KeyW.pressed);
 	position.x += DirX * 6;
@@ -37,7 +37,7 @@ void Player::draw() {
 }
 
 void Player::shot() {
-	if (Input::KeySpace.pressed)
+	if (Input::MouseL.pressed)
 	{
 		GameManager::get_instance().bullets.push_back(
 			Bullet(position - Vec2{0, 16}, bullets_move, bullets_draw)

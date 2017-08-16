@@ -22,7 +22,7 @@ public:
 	~Player();
 
 	void update_status();
-	void update_move();
+	void move();
 	void draw();
 	void shot();
 };
