@@ -4,7 +4,7 @@
 #include "DrawPattern.h"
 
 Player::Player()
-	: bullets_move(MovePattern::for_mouse(*this)), bullets_draw(DrawPattern::quad) {}
+	: bullets_move(MovePattern::straight(*this)), bullets_draw(DrawPattern::circle) {}
 
 Player::~Player()
 {
@@ -29,7 +29,7 @@ void Player::move() {
 
 void Player::draw() {
 	Quad(
-	{ position.x , position.y - 20 },
+	{ position.x , position.y-20 },
 	{ position.x + 8 , position.y + 4 },
 	{ position.x , position.y + 16 },
 	{ position.x - 8 , position.y + 4 }
@@ -52,11 +52,19 @@ void Player::shot() {
 void Player::update() {
 	shotCount += 1;
 	Vec2 distance = Mouse::Pos() - position;
-	Vec2 direction = distance.normalized();
+	Vec2 direction = (Mouse::Pos() - position).normalize();
 
 }
 
 const Vec2& Player::get_position() const
 {
 	return position;
+}
+const Vec2& Player::get_distance() const
+{
+	return distance;
+}
+const Vec2& Player::get_direction() const
+{
+	return direction;
 }

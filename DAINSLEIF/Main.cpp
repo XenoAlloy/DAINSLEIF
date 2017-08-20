@@ -123,10 +123,12 @@ void Main()
 					rect.draw(Color(0, 0, 0, 200));
 				}
 				menubar.draw(Color(0, 0, 0));
-				fontMin(L"DAINSLEIF").draw(8, 4);
+				//fontMin(L"DAINSLEIF").draw(8, 4);
 				close.draw(Color(0, 0, 0));
 				Line(778, 8, 792, 22).draw(2);
 				Line(792, 8, 778, 22).draw(2);
+
+				fontMin(player.get_distance()).draw();
 			}
 		}
 	}

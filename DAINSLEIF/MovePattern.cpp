@@ -7,12 +7,12 @@ Vec2 MovePattern::straight_up(const Bullet & bullet)
 }
 
 
-std::function<Vec2(const Bullet&)> MovePattern::for_mouse(const Player & player)
+std::function<Vec2(const Bullet&)> MovePattern::straight(const Player & player)
 {
 	return [direction=Vec2(), &player](const Bullet & c) mutable {
 		if (direction.isZero()) {
 			direction = (Mouse::Pos() - player.get_position()).normalize();
 		}
-		return direction;
+		return direction*8;
 	};
 }

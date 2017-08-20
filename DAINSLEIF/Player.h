@@ -30,4 +30,6 @@ public:
 	void shot();
 
 	const Vec2& get_position() const;
+	const Vec2& get_distance() const;
+	const Vec2& get_direction() const;
 };
