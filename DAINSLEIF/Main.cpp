@@ -20,10 +20,6 @@ void Main()
 	int menuExtend = 0;
 	Point mousePos = Mouse::Pos();
 
-	class StraightWeapon{
-		void move_pattern() {
-		}
-	};
 	Player player;
 
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
@@ -93,6 +89,7 @@ void Main()
 				void updatePlayer(); {
 					player.shot();
 					player.move();
+					player.update();
 				}
 				void updateEneBullet(); {
 				}

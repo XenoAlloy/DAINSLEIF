@@ -5,7 +5,7 @@ class DrawPattern
 {
 public:
 	static void circle(const Bullet&);
-
+	static void quad(const Bullet&);
 
 	DrawPattern() = delete;
 	~DrawPattern() = delete;

@@ -5,13 +5,16 @@
 class Player
 {
 	Vec2 position = {210,500};
-	int EquipWeaponA = 0;
-	int EquipBulletA = 0;
-	int Speed = 6;
-	int ShiftDownSpeed = 4;
-	int DirX;
-	int DirY;
-	int Size = 6;
+	Vec2 dir;
+	int equipWeaponA = 0;
+	int equipBulletA = 0;
+	int speed = 6;
+	int shiftDownSpeed = 4;
+	int size = 6;
+	int shotWait = 4;
+	int shotCount = 0;
+	Vec2 distance;
+	Vec2 direction;
 
 	std::function<Vec2(const Bullet &)> bullets_move;
 	std::function<void(const Bullet &)> bullets_draw;
@@ -21,7 +24,7 @@ public:
 	Player();
 	~Player();
 
-	void update_status();
+	void update();
 	void move();
 	void draw();
 	void shot();
