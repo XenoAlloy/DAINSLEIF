@@ -25,4 +25,6 @@ public:
 	void move();
 	void draw();
 	void shot();
+
+	const Vec2& get_position() const;
 };

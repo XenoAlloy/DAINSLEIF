@@ -4,7 +4,7 @@
 #include "DrawPattern.h"
 
 Player::Player()
-	: bullets_move(MovePattern::straight_up), bullets_draw(DrawPattern::circle) {}
+	: bullets_move(MovePattern::for_mouse(*this)), bullets_draw(DrawPattern::circle) {}
 
 Player::~Player()
 {
@@ -44,4 +44,9 @@ void Player::shot() {
 		);
 	}
 	
+}
+
+const Vec2& Player::get_position() const
+{
+	return position;
 }
