@@ -5,6 +5,7 @@ class Bullet
 {
 	int power;
 	Vec2 position;
+	Vec2 direction;
 	
 	std::function<Vec2(const Bullet &)> _move;
 	std::function<void(const Bullet &)> _draw;
@@ -13,10 +14,12 @@ class Bullet
 	friend class DrawPattern;
 
 public:
-	Bullet(Vec2, std::function<Vec2(const Bullet&)>, std::function<void(const Bullet&)>);
+	Bullet(Vec2, std::function<Vec2(const Bullet&)>, std::function<void(const Bullet&)>, Vec2 normalized_direction);
 	~Bullet();
 
 	void update();
 	void draw();
+
+	double get_angle() const;
 };
 

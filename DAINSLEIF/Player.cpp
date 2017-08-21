@@ -4,7 +4,7 @@
 #include "DrawPattern.h"
 
 Player::Player()
-	: bullets_move(MovePattern::straight(*this)), bullets_draw(DrawPattern::circle) {}
+	: bullets_move(MovePattern::straight(*this)), bullets_draw(DrawPattern::quad) {}
 
 Player::~Player()
 {
@@ -44,7 +44,7 @@ void Player::shot() {
 	{
 		if (shotCount > shotWait) {
 			GameManager::get_instance().bullets.push_back(
-				Bullet(position - direction*-16, bullets_move, bullets_draw)
+				Bullet(position - direction*-16, bullets_move, bullets_draw, direction)
 			);
 			shotCount = 0;
 		}
