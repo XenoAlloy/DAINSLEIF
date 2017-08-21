@@ -29,11 +29,14 @@ void Player::move() {
 
 void Player::draw() {
 	Quad(
-	{ position.x , position.y-20 },
-	{ position.x + 8 , position.y + 4 },
+	{ position.x , position.y - 20 },
+	{ position.x + 8 , position.y + 4  },
 	{ position.x , position.y + 16 },
 	{ position.x - 8 , position.y + 4 }
-	).draw(Color(0, 220, 176, 220));
+	)
+		.rotatedAt(position, atan2(direction.x,-direction.y))
+		.drawFrame(2, 0, Color(0, 0, 0))
+		.draw(Color(0, 220, 176, 220));
 }
 
 void Player::shot() {
@@ -41,7 +44,7 @@ void Player::shot() {
 	{
 		if (shotCount > shotWait) {
 			GameManager::get_instance().bullets.push_back(
-				Bullet(position - Vec2{ 0, 16 }, bullets_move, bullets_draw)
+				Bullet(position - direction*-16, bullets_move, bullets_draw)
 			);
 			shotCount = 0;
 		}
@@ -51,20 +54,24 @@ void Player::shot() {
 
 void Player::update() {
 	shotCount += 1;
-	Vec2 distance = Mouse::Pos() - position;
-	Vec2 direction = (Mouse::Pos() - position).normalize();
+	direction = (Mouse::Pos() - position).normalize();
+	
+}
 
+void Player::damaged(int damage) 
+{
+	life -= damage;
 }
 
 const Vec2& Player::get_position() const
 {
 	return position;
 }
-const Vec2& Player::get_distance() const
-{
-	return distance;
-}
 const Vec2& Player::get_direction() const
 {
 	return direction;
+}
+const double& Player::get_atan2() const
+{
+	return atan2(direction.x, -direction.y);
 }

@@ -13,8 +13,9 @@ class Player
 	int size = 6;
 	int shotWait = 4;
 	int shotCount = 0;
-	Vec2 distance;
 	Vec2 direction;
+	int life;
+	int maxLife;
 
 	std::function<Vec2(const Bullet &)> bullets_move;
 	std::function<void(const Bullet &)> bullets_draw;
@@ -28,8 +29,9 @@ public:
 	void move();
 	void draw();
 	void shot();
+	void damaged(int damage);
 
 	const Vec2& get_position() const;
-	const Vec2& get_distance() const;
 	const Vec2& get_direction() const;
+	const double& get_atan2() const;
 };
