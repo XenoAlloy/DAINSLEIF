@@ -29,14 +29,41 @@ void Player::move() {
 
 void Player::draw() {
 	Quad(
+	{ position.x, position.y - 4 },
+	{ position.x + 10, position.y + 3  },
+	{ position.x + 12, position.y + 14 },
+	{ position.x + 2 , position.y + 6}
+	)
+		.rotatedAt(position, atan2(direction.x, -direction.y))
+		.drawFrame(2, 0, Color(0, 0, 0))
+		.draw(Color(0, 255, 200, 220));
+	Quad(
+	{ position.x, position.y - 4 },
+	{ position.x - 10, position.y + 3 },
+	{ position.x - 12, position.y + 14 },
+	{ position.x - 2 , position.y + 6 }
+	)
+		.rotatedAt(position, atan2(direction.x, -direction.y))
+		.drawFrame(2, 0, Color(0, 0, 0))
+		.draw(Color(0, 255, 200, 220));
+	Quad(
 	{ position.x , position.y - 20 },
-	{ position.x + 8 , position.y + 4  },
+	{ position.x + 8 , position.y + 4 },
 	{ position.x , position.y + 16 },
 	{ position.x - 8 , position.y + 4 }
 	)
 		.rotatedAt(position, atan2(direction.x,-direction.y))
 		.drawFrame(2, 0, Color(0, 0, 0))
-		.draw(Color(0, 220, 176, 220));
+		.draw(Color(255, 255, 255, 255));
+	Quad(
+	{ position.x , position.y - 8 },
+	{ position.x + 4 , position.y + 4 },
+	{ position.x , position.y + 20 },
+	{ position.x - 4 , position.y + 4 }
+	)
+		.rotatedAt(position, atan2(direction.x, -direction.y))
+		.drawFrame(1, 0, Color(0, 0, 0))
+		.draw(Color(255, 255, 255, 255));
 }
 
 void Player::shot() {
@@ -44,7 +71,7 @@ void Player::shot() {
 	{
 		if (shotCount > shotWait) {
 			GameManager::get_instance().bullets.push_back(
-				Bullet(position - direction*-16, bullets_move, bullets_draw, direction)
+				Bullet(position + direction*16, bullets_move, bullets_draw, direction)
 			);
 			shotCount = 0;
 		}
