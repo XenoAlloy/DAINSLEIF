@@ -71,7 +71,7 @@ void Player::shot() {
 	{
 		if (shotCount > shotWait) {
 			GameManager::get_instance().bullets.push_back(
-				Bullet(position + direction*16, bullets_move, bullets_draw, direction)
+				Bullet(position + direction*16, bullets_move, bullets_draw, direction, grouping)
 			);
 			shotCount = 0;
 		}
