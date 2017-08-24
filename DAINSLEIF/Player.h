@@ -8,8 +8,10 @@ class Player
 	Vec2 dir;
 	int equipWeaponA = 0;
 	int equipBulletA = 0;
-	int speed = 6;
-	int shiftDownSpeed = 4;
+	double speed;
+	double baseSpeed = 6.00;
+	double limitedSpeed = 4.00;
+	double boostedSpeed = 10.00;
 	int size = 6;
 	int shotWait = 4;
 	int shotCount = 0;

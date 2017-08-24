@@ -16,10 +16,6 @@ void Player::move() {
 	dir.y = (Input::KeyS.pressed - Input::KeyW.pressed);
 	position.x += dir.x * 6;
 	position.y += dir.y * 6;
-	if (Input::KeyShift.pressed == 1) {
-		position.x -= dir.x * 4;
-		position.y-= dir.y * 4;
-	}
 	if (position.x > 390-size-4) {position.x = 390 - size - 4;}
 	if (position.x < 30 + size + 4) { position.x = 30 + size + 4; }
 	if (position.y > 570 - size - 4) { position.y = 570 - size - 4; }
@@ -81,8 +77,29 @@ void Player::shot() {
 
 void Player::update() {
 	shotCount += 1;
+
 	direction = (Mouse::Pos() - position).normalize();
+
+	if(Input::KeyShift.pressed)
+	{
+		bullets_draw = DrawPattern::circle;
+	}else {
+		bullets_draw = DrawPattern::quad;
+	}
+	if (Input::KeyShift.pressed + Input::KeySpace.pressed > 1) {
+		speed = (limitedSpeed + boostedSpeed)*0.5;
 	
+	}else if (Input::KeyShift.pressed) 
+	{
+		speed = limitedSpeed;
+	}else if (Input::KeySpace.pressed)
+	{
+		speed = boostedSpeed;
+	}else 
+	{
+		speed = baseSpeed;
+	}
+
 }
 
 void Player::damaged(int damage) 
