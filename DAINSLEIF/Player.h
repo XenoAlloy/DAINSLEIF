@@ -14,6 +14,7 @@ class Player
 	int shotWait = 4;
 	int shotCount = 0;
 	Vec2 direction;
+	double grouping = 0.1;
 	int life;
 	int maxLife;
 
