@@ -87,9 +87,9 @@ void Main()
 				void updateEnemy(); {
 				}
 				void updatePlayer(); {
-					player.shot();
-					player.move();
 					player.update();
+					player.move();
+					player.shot();
 				}
 				void updateEneBullet(); {
 				}

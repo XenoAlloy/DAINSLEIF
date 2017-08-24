@@ -12,10 +12,8 @@ Player::~Player()
 
 
 void Player::move() {
-	dir.x = (Input::KeyD.pressed - Input::KeyA.pressed);
-	dir.y = (Input::KeyS.pressed - Input::KeyW.pressed);
-	position.x += dir.x * 6;
-	position.y += dir.y * 6;
+	dir = {(Input::KeyD.pressed - Input::KeyA.pressed), (Input::KeyS.pressed - Input::KeyW.pressed)};
+	position += Vec2{ dir.x * speed, dir.y * speed };
 	if (position.x > 390-size-4) {position.x = 390 - size - 4;}
 	if (position.x < 30 + size + 4) { position.x = 30 + size + 4; }
 	if (position.y > 570 - size - 4) { position.y = 570 - size - 4; }
