@@ -13,13 +13,25 @@ Player::~Player()
 
 void Player::move() {
 	dir = {(Input::KeyD.pressed - Input::KeyA.pressed), (Input::KeyS.pressed - Input::KeyW.pressed)};
-	if (dir.x*dir.y) { speed = speed*0.71; }
-	position += Vec2{ dir.x * speed, dir.y * speed };
-	if (position.x > 390-size-4) {position.x = 390 - size - 4;}
-	if (position.x < 30 + size + 4) { position.x = 30 + size + 4; }
-	if (position.y > 570 - size - 4) { position.y = 570 - size - 4; }
-	if (position.y < 30 + size + 4) { position.y = 30 + size + 4; }
+	
+	if (dir.x*dir.y) { position += Vec2{ dir.x * speed, dir.y * speed }*0.71; }
+	else { position += Vec2{ dir.x * speed, dir.y * speed }; }
 
+	if (dir.length() > 0) { dxdy = Vec2{ dir.x * speed, dir.y * speed }; }
+
+	dxdy = dxdy*0.98;
+	if (dxdy.length() <= 1) { dxdy = Vec2{ 0,0 }; }
+	position += dxdy;
+
+	
+
+
+	
+
+	if (position.x > 770-size*3-4) {position.x = 770 - size*3 - 4;}
+	if (position.x < 30 + size*3 + 4) { position.x = 30 + size*3 + 4; }
+	if (position.y > 570 - size*3 - 4) { position.y = 570 - size*3 - 4; }
+	if (position.y < 30 + size*3 + 4) { position.y = 30 + size*3 + 4; }
 }
 
 void Player::draw() {
@@ -85,20 +97,35 @@ void Player::update() {
 	}else {
 		bullets_draw = DrawPattern::quad;
 	}
+
+
+	
 	if (Input::KeyShift.pressed + Input::KeySpace.pressed > 1) {
-		speed = (limitedSpeed + boostedSpeed)*0.5;
+		speedLimit = (slowerSpeed + higherSpeed)*0.5;
 	
 	}else if (Input::KeyShift.pressed) 
 	{
-		speed = limitedSpeed;
+		speedLimit = slowerSpeed;
 	}else if (Input::KeySpace.pressed)
 	{
-		speed = boostedSpeed;
+		speedLimit = higherSpeed;
 	}else 
 	{
-		speed = baseSpeed;
+		speedLimit = baseSpeed;
 	}
+	
 
+	
+	if (speed < speedLimit) 
+	{
+		speed += acceleration;
+	}
+	else 
+	{
+		speed -= cBrake;
+	
+	}
+	
 }
 
 void Player::damaged(int damage) 
@@ -117,4 +144,8 @@ const Vec2& Player::get_direction() const
 const double& Player::get_atan2() const
 {
 	return atan2(direction.x, -direction.y);
+}
+const double& Player::get_speed() const
+{
+	return speed;
 }

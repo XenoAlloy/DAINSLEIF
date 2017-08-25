@@ -15,6 +15,6 @@ std::function<Vec2(const Bullet&)> MovePattern::straight(const Player & player)
 			direction = (Mouse::Pos() - player.get_position()).normalize() + Vec2{ Random(-0.1,0.1), Random(-0.1,0.1) };
 		}
 
-		return direction *8;
+		return direction *14;
 	};
 }

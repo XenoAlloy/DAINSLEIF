@@ -6,14 +6,18 @@ class Player
 {
 	Vec2 position = {210,500};
 	Vec2 dir;
+	Vec2 dxdy;
 	int equipWeaponA = 0;
 	int equipBulletA = 0;
-	double speed;
+	double speed = 0.00;
+	double speedLimit;
 	double baseSpeed = 6.00;
-	double limitedSpeed = 4.00;
-	double boostedSpeed = 10.00;
+	double slowerSpeed = 4.00;
+	double higherSpeed = 10.40;
+	double acceleration = 0.05;
+	double cBrake = 0.10;
 	int size = 6;
-	int shotWait = 4;
+	int shotWait = 8;
 	int shotCount = 0;
 	Vec2 direction;
 	double grouping = 0.1;
@@ -37,4 +41,5 @@ public:
 	const Vec2& get_position() const;
 	const Vec2& get_direction() const;
 	const double& get_atan2() const;
+	const double& get_speed() const;
 };

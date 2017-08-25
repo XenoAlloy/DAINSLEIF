@@ -128,7 +128,7 @@ void Main()
 				Line(778, 8, 792, 22).draw(2);
 				Line(792, 8, 778, 22).draw(2);
 
-				fontMin(player.get_direction()).draw();
+				fontMin(player.get_speed()).draw();
 			}
 		}
 	}
