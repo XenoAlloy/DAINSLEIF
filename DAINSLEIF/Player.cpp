@@ -14,12 +14,66 @@ Player::~Player()
 void Player::move() {
 	dir = {(Input::KeyD.pressed - Input::KeyA.pressed), (Input::KeyS.pressed - Input::KeyW.pressed)};
 	
+	force += dir*0.1;
+
 	if (dir.x*dir.y) { position += Vec2{ dir.x * speed, dir.y * speed }*0.71; }
 	else { position += Vec2{ dir.x * speed, dir.y * speed }; }
 
-	if (dir.length() > 0) { dxdy = Vec2{ dir.x * speed, dir.y * speed }; }
 
-	dxdy = dxdy*0.98;
+
+	if (Input::KeyShift.pressed)
+	{
+		bullets_draw = DrawPattern::circle;
+	}
+	else {
+		bullets_draw = DrawPattern::quad;
+	}
+
+
+
+	if (Input::KeyShift.pressed + Input::KeySpace.pressed > 1) {
+		speedLimit = (slowerSpeed + higherSpeed)*0.5;
+
+	}
+	else if (Input::KeyShift.pressed)
+	{
+		speedLimit = slowerSpeed;
+	}
+	else if (Input::KeySpace.pressed)
+	{
+		speedLimit = higherSpeed;
+	}
+	else
+	{
+		speedLimit = baseSpeed;
+	}
+
+
+
+
+	if (dir.length() > 0)
+	{
+		dxdy = Vec2{ dir.x * speed, dir.y * speed };
+
+		if (speedLimit > speed) {
+			speed += acceleration;
+		}
+		else 
+		{
+			speed -= 0.05;
+		}
+	}
+	else {
+		if (speed > 0.10)
+		{
+			speed -= 0.18;
+		}
+		else {
+			speed = 0;
+		}
+	}
+
+	dxdy = dxdy*0.96;
 	if (dxdy.length() <= 1) { dxdy = Vec2{ 0,0 }; }
 	position += dxdy;
 
@@ -91,40 +145,11 @@ void Player::update() {
 
 	direction = (Mouse::Pos() - position).normalize();
 
-	if(Input::KeyShift.pressed)
-	{
-		bullets_draw = DrawPattern::circle;
-	}else {
-		bullets_draw = DrawPattern::quad;
-	}
-
-
 	
-	if (Input::KeyShift.pressed + Input::KeySpace.pressed > 1) {
-		speedLimit = (slowerSpeed + higherSpeed)*0.5;
-	
-	}else if (Input::KeyShift.pressed) 
-	{
-		speedLimit = slowerSpeed;
-	}else if (Input::KeySpace.pressed)
-	{
-		speedLimit = higherSpeed;
-	}else 
-	{
-		speedLimit = baseSpeed;
-	}
 	
 
 	
-	if (speed < speedLimit) 
-	{
-		speed += acceleration;
-	}
-	else 
-	{
-		speed -= cBrake;
-	
-	}
+
 	
 }
 

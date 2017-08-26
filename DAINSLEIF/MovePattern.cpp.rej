@@ -1,0 +1,9 @@
+diff a/DAINSLEIF/MovePattern.cpp b/DAINSLEIF/MovePattern.cpp	(rejected hunks)
+@@ -15,6 +15,6 @@
+ 			direction = (Mouse::Pos() - player.get_position()).normalize() + Vec2{ Random(-0.1,0.1), Random(-0.1,0.1) };
+ 		}
+ 
+-		return direction *8;
++		return direction *14;
+ 	};
+ }
