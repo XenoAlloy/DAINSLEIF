@@ -4,19 +4,19 @@
 
 class Player
 {
-	Vec2 position = {210,500};
-	Vec2 dir;
-	Vec2 dxdy;
-	Vec2 force;
+
+	enum Speed {
+		HIGHER, SLOWER, COUNT
+	} speed;
+
+	Vec2 position;
+	Vec2 velocity;
 	int equipWeaponA = 0;
 	int equipBulletA = 0;
-	double speed = 0.00;
-	double speedLimit;
-	double baseSpeed = 4.00;
-	double slowerSpeed = 2.00;
-	double higherSpeed = 7.00;
-	double acceleration = 0.40;
-	double mass = 10.00;
+
+	double acceleration[Speed::COUNT] = { 0.2, 0.15 };
+	double deceleration[Speed::COUNT] = { 0.98, 0.94 };
+
 	int size = 6;
 	int shotWait = 8;
 	int shotCount = 0;
@@ -40,7 +40,7 @@ public:
 	void damaged(int damage);
 
 	const Vec2& get_position() const;
+	const Vec2& get_velocity() const;
 	const Vec2& get_direction() const;
 	const double& get_atan2() const;
-	const double& get_speed() const;
 };
