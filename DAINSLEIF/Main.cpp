@@ -106,8 +106,9 @@ void Main()
 					Line(778, 8, 792, 22).draw(2);
 					Line(792, 8, 778, 22).draw(2);
 
-					fontMin(player.get_speed()).draw();
+					fontMin(L"Position:",player.get_position(), L"  Velocity:",player.get_velocity()).draw();
 				}
+
 			}
 			break;
 		}
