@@ -6,7 +6,7 @@ void Main()
 	Window::SetTitle(L"DAINSLEIF");
 	Window::Resize(800, 600);
 	Window::SetStyle(WindowStyle::NonFrame);
-	char Gamemode = 1;
+	char Gamemode = 0;
 
 	const Font fontMin(14);
 
@@ -28,7 +28,18 @@ void Main()
 	{
 		switch (Gamemode)
 		{
-		case 1:
+		case 0://Title
+			void updateGame(); {
+			}
+			void drawGame(); {
+			}
+
+
+
+
+			break;
+
+		case 1://Stage
 			void updateGame(); {
 				void updateWindow(); {
 					//closeをクリックで閉じる
