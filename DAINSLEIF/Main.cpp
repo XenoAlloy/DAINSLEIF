@@ -1,6 +1,8 @@
 ﻿# include <Siv3D.hpp>
 # include "Player.h"
 # include "GameManager.h"
+
+
 void Main()
 {
 	Window::SetTitle(L"DAINSLEIF");
@@ -8,7 +10,23 @@ void Main()
 	Window::SetStyle(WindowStyle::NonFrame);
 	char Gamemode = 0;
 
+
+	// フォントファイルを一時的にインストール
+	if (!FontManager::Register(L"asset/font/GAU_Over_Drive.TTF"))
+	{
+		return;// 失敗したら終了
+	}
+	if (!FontManager::Register(L"asset/font/GAU_White_Base.TTF"))
+	{
+		return;// 失敗したら終了
+	}
+
+
 	const Font fontMin(14);
+	const Font overDrive(40, L"GauFontOverDrive");
+	const Font whiteBase(40, L"GauFontWhiteBase");
+
+	const String title(L"DAINSLEIF");
 
 
 	//メニュー関連
@@ -29,11 +47,8 @@ void Main()
 		switch (Gamemode)
 		{
 		case 0://Title
-			void updateGame(); {
-			}
-			void drawGame(); {
-			}
 
+			overDrive(title).draw();
 
 
 
