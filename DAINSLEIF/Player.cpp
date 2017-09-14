@@ -24,6 +24,7 @@ void Player::move() {
 	if (!move_dir.isZero()) {
 		velocity += acceleration[speed] * move_dir.normalize();
 	}
+	force += move_dir*0.1;
 
 	position += velocity;
 	velocity *= deceleration[speed];

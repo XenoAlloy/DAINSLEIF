@@ -14,6 +14,8 @@ class Player
 	int equipBulletA = 0;
 	double acceleration[Speed::COUNT] = { 0.2, 0.05 };
 	double deceleration[Speed::COUNT] = { 0.98, 0.9 };
+	Vec2 force;
+	double mass = 10.00;
 	int size = 6;
 	int shotWait = 8;
 	int shotCount = 0;
