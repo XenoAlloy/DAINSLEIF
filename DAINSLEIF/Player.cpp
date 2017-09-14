@@ -81,6 +81,12 @@ void Player::draw() {
 		.rotatedAt(position, atan2(direction.x, -direction.y))
 		.drawFrame(1, 0, Color(0, 0, 0))
 		.draw(Color(255, 255, 255, 255));
+	Circle(
+		position, size
+	)
+
+		.draw(Color(0, 255, 200, (Input::KeyShift.pressed) * 255))
+		.drawFrame(1, 0, Color(0, 0, 0, (Input::KeyShift.pressed) * 150));
 }
 
 void Player::shot() {
