@@ -8,7 +8,22 @@ void Main()
 	Window::SetStyle(WindowStyle::NonFrame);
 	char Gamemode = 1;
 
+
+	// フォントファイルを一時的にインストール
+	if (!FontManager::Register(L"asset/font/GAU_Over_Drive.TTF"))
+	{
+		return;// 失敗したら終了
+	}
+	if (!FontManager::Register(L"asset/font/GAU_White_Base.TTF"))
+	{
+		return;// 失敗したら終了
+	}
+
 	const Font fontMin(14);
+	const Font overDrive(40, L"GauFontOverDrive");
+	const Font whiteBase(40, L"GauFontWhiteBase");
+
+	const String title(L"DAINSLEIF");
 
 
 	//メニュー関連
@@ -30,6 +45,9 @@ void Main()
 		{
 		case 0://Title
 
+			//２つのフォントでタイトル描き比べしてるだけ
+			overDrive(title).draw();
+			whiteBase(title).draw(0,100);
 
 			break;
 
