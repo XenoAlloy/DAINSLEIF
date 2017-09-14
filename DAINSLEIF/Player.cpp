@@ -26,15 +26,6 @@ void Player::move() {
 	}
 	force += move_dir*0.1;
 
-
-	if (Input::KeyShift.pressed)
-	{
-		bullets_draw = DrawPattern::circle;
-	}
-	else {
-		bullets_draw = DrawPattern::quad;
-	}
-
 	position += velocity;
 	velocity *= deceleration[speed];
 
