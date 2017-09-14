@@ -4,7 +4,10 @@
 #include "DrawPattern.h"
 
 Player::Player()
-	: bullets_move(MovePattern::straight(*this)), bullets_draw(DrawPattern::quad) {}
+	: bullets_move(MovePattern::straight(*this))
+	, bullets_draw(DrawPattern::quad)
+	, position{ 210, 500 }
+	, velocity{} {}
 
 Player::~Player()
 {
@@ -12,21 +15,18 @@ Player::~Player()
 
 
 void Player::move() {
-	dir = {(Input::KeyD.pressed - Input::KeyA.pressed), (Input::KeyS.pressed - Input::KeyW.pressed)};
+	auto move_dir = Vec2{};
+	if (Input::KeyD.pressed) move_dir.x += 1;
+	if (Input::KeyA.pressed) move_dir.x -= 1;
+	if (Input::KeyS.pressed) move_dir.y += 1;
+	if (Input::KeyW.pressed) move_dir.y -= 1;
 	
-	if (dir.x*dir.y) { position += Vec2{ dir.x * speed, dir.y * speed }*0.71; }
-	else { position += Vec2{ dir.x * speed, dir.y * speed }; }
+	if (!move_dir.isZero()) {
+		velocity += acceleration[speed] * move_dir.normalize();
+	}
 
-	if (dir.length() > 0) { dxdy = Vec2{ dir.x * speed, dir.y * speed }; }
-
-	dxdy = dxdy*0.98;
-	if (dxdy.length() <= 1) { dxdy = Vec2{ 0,0 }; }
-	position += dxdy;
-
-	
-
-
-	
+	position += velocity;
+	velocity *= deceleration[speed];
 
 	if (position.x > 770-size*3-4) {position.x = 770 - size*3 - 4;}
 	if (position.x < 30 + size*3 + 4) { position.x = 30 + size*3 + 4; }
@@ -93,39 +93,12 @@ void Player::update() {
 
 	if(Input::KeyShift.pressed)
 	{
+		speed = Speed::SLOWER;
 		bullets_draw = DrawPattern::circle;
 	}else {
+		speed = Speed::HIGHER;
 		bullets_draw = DrawPattern::quad;
 	}
-
-
-	
-	if (Input::KeyShift.pressed + Input::KeySpace.pressed > 1) {
-		speedLimit = (slowerSpeed + higherSpeed)*0.5;
-	
-	}else if (Input::KeyShift.pressed) 
-	{
-		speedLimit = slowerSpeed;
-	}else if (Input::KeySpace.pressed)
-	{
-		speedLimit = higherSpeed;
-	}else 
-	{
-		speedLimit = baseSpeed;
-	}
-	
-
-	
-	if (speed < speedLimit) 
-	{
-		speed += acceleration;
-	}
-	else 
-	{
-		speed -= cBrake;
-	
-	}
-	
 }
 
 void Player::damaged(int damage) 
@@ -144,8 +117,4 @@ const Vec2& Player::get_direction() const
 const double& Player::get_atan2() const
 {
 	return atan2(direction.x, -direction.y);
-}
-const double& Player::get_speed() const
-{
-	return speed;
 }
