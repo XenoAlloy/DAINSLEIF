@@ -28,7 +28,13 @@ void Main()
 	{
 		switch (Gamemode)
 		{
-		case 1:
+		case 0://Title
+
+
+			break;
+
+		case 1://Stage
+
 			void updateGame(); {
 				void updateWindow(); {
 					//closeをクリックで閉じる
