@@ -1,4 +1,5 @@
 ﻿# include <Siv3D.hpp>
+# include "Scene.hpp"
 # include "Player.h"
 # include "GameManager.h"
 void Main()
@@ -6,7 +7,7 @@ void Main()
 	Window::SetTitle(L"DAINSLEIF");
 	Window::Resize(800, 600);
 	Window::SetStyle(WindowStyle::NonFrame);
-	char Gamemode = 1;
+	Scene gamemode = Scene::Stage;
 
 
 	// フォントファイルを一時的にインストール
@@ -41,9 +42,9 @@ void Main()
 
 	while (System::Update())
 	{
-		switch (Gamemode)
+		switch (gamemode)
 		{
-		case 0://Title
+		case Scene::Title:
 
 			//２つのフォントでタイトル描き比べしてるだけ
 			overDrive(title).draw();
@@ -51,7 +52,7 @@ void Main()
 
 			break;
 
-		case 1://Stage
+		case Scene::Stage:
 
 			void updateGame(); {
 				void updateWindow(); {
