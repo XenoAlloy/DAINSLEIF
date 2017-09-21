@@ -1,5 +1,6 @@
 #pragma once
-#include<Siv3D.hpp>
+#include <Siv3D.hpp>
+#include "BulletShape.hpp"
 
 class Bullet
 {
@@ -8,19 +9,21 @@ class Bullet
 	Vec2 direction;
 	double grouping;
 	
+	BulletShape shape;
+
 	std::function<Vec2(const Bullet &)> _move;
-	std::function<void(const Bullet &)> _draw;
 	
 	friend class MovePattern;
-	friend class DrawPattern;
 
 public:
-	Bullet(Vec2, std::function<Vec2(const Bullet&)>, std::function<void(const Bullet&)>, Vec2 normalized_direction, double grouping);
-	~Bullet();
+	Bullet(Vec2, std::function<Vec2(const Bullet&)>,
+		BulletShape, Vec2 normalized_direction, double grouping);
+
+	Bullet& operator=(const Bullet&) = default;
 
 	void update();
 	void draw();
 
 	double get_angle() const;
+	const BulletShape& get_shape() const;
 };
-

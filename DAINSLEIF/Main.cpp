@@ -39,6 +39,7 @@ void Main()
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
 
+	auto testCircle = Circle(Vec2(200, 200), 200);
 
 	while (System::Update())
 	{
@@ -102,6 +103,13 @@ void Main()
 							b.update();
 						}
 					}
+
+					void checkcollision(); {
+						auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
+							[&testCircle](const Bullet& b) -> bool
+						{ return b.get_shape().intersects(testCircle); });
+						manager.bullets.erase(remove_ptr, manager.bullets.end());
+					}
 				}
 
 			}
@@ -133,6 +141,7 @@ void Main()
 
 					fontMin(player.get_position()).draw();
 				}
+				testCircle.draw(Color(255, 0, 0, 80));
 				break;
 			}
 		}

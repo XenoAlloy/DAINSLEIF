@@ -1,11 +1,11 @@
 #include "Player.h"
 #include "GameManager.h"
 #include "MovePattern.h"
-#include "DrawPattern.h"
+#include "BulletShape.hpp"
 
 Player::Player()
 	: bullets_move(MovePattern::straight(*this))
-	, bullets_draw(DrawPattern::quad)
+	, create_bullets_shape(BulletShape::quad)
 	, position{ 400, 500 }
 	, velocity{} {}
 
@@ -84,8 +84,10 @@ void Player::shot() {
 	if (Input::MouseL.pressed)
 	{
 		if (shotCount > shotWait) {
+			auto bulletPosition = position + direction * 16;
 			GameManager::get_instance().bullets.push_back(
-				Bullet(position + direction*16, bullets_move, bullets_draw, direction, grouping)
+				Bullet(bulletPosition, bullets_move,
+					create_bullets_shape(bulletPosition, static_cast<float>(atan2(direction.x, -direction.y))), direction, grouping)
 			);
 			shotCount = 0;
 		}
@@ -101,10 +103,10 @@ void Player::update() {
 	if(Input::KeyShift.pressed)
 	{
 		speed = Speed::SLOWER;
-		bullets_draw = DrawPattern::circle;
+		create_bullets_shape = BulletShape::circle;
 	}else {
 		speed = Speed::HIGHER;
-		bullets_draw = DrawPattern::quad;
+		create_bullets_shape = BulletShape::quad;
 	}
 }
 
