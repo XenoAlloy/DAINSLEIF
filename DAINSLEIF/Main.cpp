@@ -1,6 +1,8 @@
 ﻿# include <Siv3D.hpp>
 # include "Scene.hpp"
 # include "Player.h"
+# include "Enemy.h"
+# include "MovePattern.h"
 # include "GameManager.h"
 void Main()
 {
@@ -35,6 +37,7 @@ void Main()
 	Point mousePos = Mouse::Pos();
 
 	Player player;
+	Enemy enemy(MovePattern::enemyToPlayer(player));
 
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
@@ -89,6 +92,9 @@ void Main()
 
 				if (menubarGrabbed == false) {
 					void updateEnemy(); {
+						enemy.update();
+						enemy.move();
+						enemy.shot();
 					}
 					void updatePlayer(); {
 						player.update();
@@ -108,6 +114,7 @@ void Main()
 			void drawGame(); {
 				rect.draw(Color(255, 255, 255));
 				void drawEnemy(); {
+					enemy.draw();
 				}
 				void drawPlayer(); {
 					player.draw();

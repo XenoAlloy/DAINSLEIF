@@ -1,6 +1,9 @@
-#include "Enemy.h"
+# include "Enemy.h"
+# include "Player.h"
 
-Enemy::Enemy()
+Enemy::Enemy(std::function<Vec2(const Enemy&)> move_pattern)
+	: _move(move_pattern)
+	, position{ 800, 100 }
 {
 }
 
@@ -15,10 +18,12 @@ void Enemy::update()
 
 void Enemy::move() 
 {
+	position += _move(*this);
 }
 
 void Enemy::draw() 
 {
+	Circle(position,50).draw(Color(255,0,0));
 }
 
 void Enemy::shot() 

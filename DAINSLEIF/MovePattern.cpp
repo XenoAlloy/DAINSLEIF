@@ -18,3 +18,10 @@ std::function<Vec2(const Bullet&)> MovePattern::straight(const Player & player)
 		return direction *14;
 	};
 }
+
+std::function<Vec2(const Enemy&)> MovePattern::enemyToPlayer(const Player & player)
+{
+	return[direction = Vec2(), &player](const Enemy & e) mutable {
+		return ((player.get_position() - e.position).normalize()) *4;
+	};
+}
