@@ -1,5 +1,5 @@
-#include "MovePattern.h"
-#include "Siv3D.hpp"
+# include "MovePattern.h"
+# include "Siv3D.hpp"
 
 
 Vec2 MovePattern::straight_up(const Bullet & bullet)

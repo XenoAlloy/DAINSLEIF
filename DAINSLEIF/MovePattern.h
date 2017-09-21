@@ -1,6 +1,6 @@
-#pragma once
-#include "Bullet.h"
-#include "Player.h"
+# pragma once
+# include "Bullet.h"
+# include "Player.h"
 
 class MovePattern
 {

@@ -8,15 +8,19 @@ class Player
 		HIGHER, SLOWER, COUNT
 	} speed;
 
-	Vec2 position;
-	Vec2 velocity;
+
 	int equipWeaponA = 0;
 	int equipBulletA = 0;
+
+	int size = 6;
+
+	Vec2 position;
+	Vec2 velocity;
 	double acceleration[Speed::COUNT] = { 0.2, 0.05 };
 	double deceleration[Speed::COUNT] = { 0.98, 0.9 };
 	Vec2 force;
 	double mass = 10.00;
-	int size = 6;
+
 	int shotWait = 8;
 	int shotCount = 0;
 	Vec2 direction;

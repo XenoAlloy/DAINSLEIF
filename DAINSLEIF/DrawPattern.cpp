@@ -1,4 +1,4 @@
-#include "DrawPattern.h"
+# include "DrawPattern.h"
 
 
 void DrawPattern::circle(const Bullet& bullet)
