@@ -33,3 +33,8 @@ void Enemy::shot()
 void Enemy::damaged(int damage) 
 {
 }
+
+const Vec2 & Enemy::get_position() const
+{
+	return position;
+}

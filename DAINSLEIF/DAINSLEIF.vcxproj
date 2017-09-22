@@ -167,7 +167,6 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MovePattern.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -287,7 +286,7 @@
     <ClInclude Include="DrawPattern.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="MovePattern.h" />
+    <ClInclude Include="MovePattern.hpp" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.hpp" />
   </ItemGroup>

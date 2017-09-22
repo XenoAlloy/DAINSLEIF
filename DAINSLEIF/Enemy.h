@@ -10,8 +10,6 @@ class Enemy
 
 	std::function<Vec2(const Enemy &)> _move;
 
-	friend class MovePattern;
-
 public:
 
 	Enemy(std::function<Vec2(const Enemy&)>);
@@ -22,5 +20,7 @@ public:
 	void draw();
 	void shot();
 	void damaged(int damage);
+
+	const Vec2 & get_position() const;
 };
 

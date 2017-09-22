@@ -2,7 +2,7 @@
 # include "Scene.hpp"
 # include "Player.h"
 # include "Enemy.h"
-# include "MovePattern.h"
+# include "MovePattern.hpp"
 # include "GameManager.h"
 void Main()
 {
@@ -37,7 +37,7 @@ void Main()
 	Point mousePos = Mouse::Pos();
 
 	Player player;
-	Enemy enemy(MovePattern::enemyToPlayer(player));
+	Enemy enemy(MovePattern ::chase<Enemy>(player.get_position()));
 
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
