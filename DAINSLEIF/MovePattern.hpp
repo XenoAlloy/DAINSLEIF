@@ -7,9 +7,9 @@ class MovePattern
 {
 public:
 	template<class Moving>
-	static auto straight(const Vec2 & from)
+	static auto straightForMouse(const Vec2 & from)
 	{
-		return[direction = Vec2(), &from](const Moving & m) mutable -> Vec2 {
+		return[direction = Vec2(), &from](const Moving &) mutable -> Vec2 {
 			if (direction.isZero()) {
 				direction = (Mouse::Pos() - from).normalize() + Vec2{ Random(-0.1,0.1), Random(-0.1,0.1) };
 			}

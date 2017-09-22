@@ -7,7 +7,7 @@ Player::Player()
 	: position{ 400, 500 }
 	, velocity{} 
 	, bullets_draw{ DrawPattern::quad }
-	, bullets_move{ MovePattern::straight<Bullet>(position) }
+	, bullets_move{ MovePattern::straightForMouse<Bullet>(position) }
 {
 }
 
