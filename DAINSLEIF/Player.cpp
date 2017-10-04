@@ -1,13 +1,13 @@
 # include "Player.h"
 # include "GameManager.h"
-# include "MovePattern.h"
+# include "MovePattern.hpp"
 # include "DrawPattern.h"
 
 Player::Player()
-	: bullets_move(MovePattern::straight(*this))
-	, bullets_draw(DrawPattern::quad)
-	, position{ 400, 500 }
+	: position{ 400, 500 }
 	, velocity{} 
+	, bullets_draw{ DrawPattern::quad }
+	, bullets_move{ MovePattern::straightForMouse<Bullet>(position) }
 {
 }
 

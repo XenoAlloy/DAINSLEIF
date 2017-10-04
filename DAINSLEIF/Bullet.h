@@ -11,7 +11,6 @@ class Bullet
 	std::function<Vec2(const Bullet &)> _move;
 	std::function<void(const Bullet &)> _draw;
 	
-	friend class MovePattern;
 	friend class DrawPattern;
 
 public:
