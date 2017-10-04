@@ -29,7 +29,7 @@ class Player
 	int maxLife;
 
 	std::function<Vec2(const Bullet &)> bullets_move;
-	std::function<void(const Bullet &)> bullets_draw;
+	std::function<BulletShape(Vec2, float)> create_bullets_shape;
 
 public:
 
