@@ -48,15 +48,17 @@ void Main()
 	{
 		switch (gamemode)
 		{
-		case Scene::Title:
+		case Scene::Title: {
 
 			//２つのフォントでタイトル描き比べしてるだけ
 			overDrive(title).draw();
-			whiteBase(title).draw(0,100);
+			whiteBase(title).draw(0, 100);
 
 			break;
 
-		case Scene::Stage:
+		}
+
+		case Scene::Stage:{
 
 			void updateGame(); {
 				void updateWindow(); {
@@ -150,6 +152,8 @@ void Main()
 				}
 				testCircle.draw(Color(255, 0, 0, 80));
 				break;
+
+			}
 			}
 		}
 	}
