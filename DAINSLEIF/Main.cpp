@@ -133,69 +133,105 @@ void Main()
 				const bool isMouse_2 = credits.mouseOver;
 				const bool isMouse_3 = exit.mouseOver;
 
-				if(isMouse_0){
-					if (textAlpha_0 >= 255) {
+				if(isMouse_0)
+				{
+					if (textAlpha_0 >= 255)
+					{
 						isTextAlpha_0 = true;
 					}
-					else if (textAlpha_0 <= 100) {
+					else if (textAlpha_0 <= 100)
+					{
 						isTextAlpha_0 = false;
 					}
-					if (isTextAlpha_0 == true) {
+					if (isTextAlpha_0 == true)
+					{
 						textAlpha_0 -= 5;
 					}
-					else if (isTextAlpha_0 == false) {
+					else if (isTextAlpha_0 == false)
+					{
 						textAlpha_0 += 5;
+					}
+					if (Input::MouseL.clicked)
+					{
+						gamemode = Scene::Stage;
 					}
 				}
-				else if(! isMouse_0){
-					if (textAlpha_0 < 255) {
+				else if(! isMouse_0)
+				{
+					if (textAlpha_0 < 255)
+					{
 						textAlpha_0 += 5;
 					}
-					if (textAlpha_0 >= 255) {
+					if (textAlpha_0 >= 255)
+					{
 						isTextAlpha_0 = true;
 					}
 				}
-				if (isMouse_2) {
-					if (textAlpha_2 >= 255) {
+				if (isMouse_2)
+				{
+					if (textAlpha_2 >= 255)
+					{
 						isTextAlpha_2 = true;
 					}
-					else if (textAlpha_2 <= 100) {
+					else if (textAlpha_2 <= 100)
+					{
 						isTextAlpha_2 = false;
 					}
-					if (isTextAlpha_2 == true) {
+					if (isTextAlpha_2 == true)
+					{
 						textAlpha_2 -= 5;
 					}
-					else if (isTextAlpha_2 == false) {
+					else if (isTextAlpha_2 == false)
+					{
 						textAlpha_2 += 5;
+					}
+					if (Input::MouseL.clicked)
+					{
+						gamemode = Scene::Credits;
 					}
 				}
-				else if (!isMouse_2) {
-					if (textAlpha_2 < 255) {
+				else if (!isMouse_2)
+				{
+					if (textAlpha_2 < 255)
+					{
 						textAlpha_2 += 5;
 					}
-					if (textAlpha_2 >= 255) {
+					if (textAlpha_2 >= 255)
+					{
 						isTextAlpha_2 = true;
 					}
 				}
-				if (isMouse_3) {
-					if (textAlpha_3 >= 255) {
+				if (isMouse_3)
+				{
+					if (textAlpha_3 >= 255)
+					{
 						isTextAlpha_3 = true;
 					}
-					else if (textAlpha_3 <= 100) {
+					else if (textAlpha_3 <= 100)
+					{
 						isTextAlpha_3 = false;
 					}
-					if (isTextAlpha_3 == true) {
+					if (isTextAlpha_3 == true)
+					{
 						textAlpha_3 -= 5;
 					}
-					else if (isTextAlpha_3 == false) {
+					else if (isTextAlpha_3 == false)
+					{
 						textAlpha_3 += 5;
+					}
+					if (Input::MouseL.clicked)
+					{
+						return;
 					}
 				}
-				else if (!isMouse_3) {
-					if (textAlpha_3 < 255) {
+				else if (!isMouse_3)
+				{
+					if (textAlpha_3 < 255)
+					{
 						textAlpha_3 += 5;
 					}
-					if (textAlpha_3 >= 255) {
+					if (textAlpha_3 >= 255)
+					{
 						isTextAlpha_3 = true;
 					}
 				}
@@ -204,8 +240,8 @@ void Main()
 			break;
 
 		}
-		case Scene::Stage:{
 
+		case Scene::Stage:{
 			void updateGame(); {
 
 
