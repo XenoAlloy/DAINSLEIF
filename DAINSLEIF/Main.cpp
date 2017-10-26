@@ -10,7 +10,8 @@ void Main()
 	Window::Resize(800, 600);
 	Window::SetStyle(WindowStyle::NonFrame);
 	Scene gamemode = Scene::Title;
-
+	Cursor::SetStyle(CursorStyle::None);
+	Color cursorColor = Color(50,205,50,210);
 
 	// フォントファイルを一時的にインストール
 	//失敗した場合プログラムを終了する
@@ -270,6 +271,12 @@ void Main()
 			Line(792, 8, 778, 22).draw(2);
 
 			fontMin(player.get_position()).draw();
+		}
+
+		void drawMouseCursor(); {
+			Circle(Mouse::Pos(), 16).drawFrame(1, 1, cursorColor);
+			Line(Mouse::Pos() + Point(-24, 0), Mouse::Pos() + Point(24, 0)).draw(2, cursorColor);
+			Line(Mouse::Pos() + Point(0, -24), Mouse::Pos() + Point(0, 24)).draw(2, cursorColor);
 		}
 	}
 }
