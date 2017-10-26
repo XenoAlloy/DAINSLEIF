@@ -13,20 +13,39 @@ void Main()
 
 
 	// フォントファイルを一時的にインストール
-	if (!FontManager::Register(L"asset/font/GAU_Over_Drive.TTF"))
+	//失敗した場合プログラムを終了する
+	if (!FontManager::Register(L"assets/font/GAU_Over_Drive.TTF"))
 	{
-		return;// 失敗したら終了
+		return;
 	}
-	if (!FontManager::Register(L"asset/font/GAU_White_Base.TTF"))
+	if (!FontManager::Register(L"assets/font/GAU_White_Base.TTF"))
 	{
-		return;// 失敗したら終了
+		return;
+	}
+	if (!FontManager::Register(L"assets/font/migmix-1m-regular.ttf"))
+	{
+		return;
+	}
+	if (!FontManager::Register(L"assets/font/migmix-1m-bold.ttf"))
+	{
+		return;
 	}
 
+
+	//ゲーム中で使うフォントの用意
 	const Font fontMin(14);
-	const Font overDrive(40, L"GauFontOverDrive");
-	const Font whiteBase(40, L"GauFontWhiteBase");
-
-	const String title(L"DAINSLEIF");
+	const Font migMixB40(40, L"MigMix 1M Bold");
+	const Font migMixB20(20, L"MigMix 1M Bold");
+	const Font migMixB10(10, L"MigMix 1M Bold");
+	const Font migMixR40(40, L"MigMix 1M Regular");
+	const Font migMixR20(20, L"MigMix 1M Regular");
+	const Font migMixR10(10, L"MigMix 1M Regular");
+	const Font overDrive40(40, L"GauFontOverDrive");
+	const Font overDrive20(20, L"GauFontOverDrive");
+	const Font overDrive10(10, L"GauFontOverDrive");
+	const Font whiteBase40(40, L"GauFontWhiteBase");
+	const Font whiteBase20(20, L"GauFontWhiteBase");
+	const Font whiteBase10(10, L"GauFontWhiteBase");
 
 
 	//メニュー関連
