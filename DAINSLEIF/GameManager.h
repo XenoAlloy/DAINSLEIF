@@ -8,6 +8,7 @@ private:
 
 public:
 	Array<Bullet> bullets;
+	int score;
 
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager&) = delete;
