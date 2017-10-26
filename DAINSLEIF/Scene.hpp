@@ -4,4 +4,5 @@ enum struct Scene {
 	Menu,
 	Stage,
 	Result,
+	Credits,
 };

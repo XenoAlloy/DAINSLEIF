@@ -257,6 +257,12 @@ void Main()
 
 			}
 			}
+
+		case Scene::Credits: {
+
+
+			break;
+		}
 		}
 		void drawWindowFrame(); {
 			rect.drawFrame(30, 0, Color(0, 0, 0));
