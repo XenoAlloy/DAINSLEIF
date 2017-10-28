@@ -1,41 +1,39 @@
 # include "UI_Button.h"
 
-UI_Button::UI_Button(String text,Vec2 position)
-	:buttonText(FontAsset(L"overDrive20")(text))
-	,buttonArea(buttonText.region(position))
-{
+UI_Button::UI_Button(String text, Vec2 position, Scene scene)
+	:buttonText(text)
+	, buttonArea(FontAsset(L"overDrive20")(text).region(position))
+	, transitTo(scene) {
 }
 UI_Button::~UI_Button()
 {
 }
 
-void UI_Button::update() {
-	auto brightness = textColor.r;
 	if (buttonArea.mouseOver)
 	{
 		if (!isCursored)
 		{
+Scene UI_Button::update() {
 			SoundAsset(L"cursor").playMulti();
 			textColor.setRGB(255);
 			isCursored = true;
 		}
-		if (brightness <= 0 || 255 <= brightness)
-		{
+		if (textColor.r <= 0 || 255 <= textColor.r) {
 			brightnessChange *= -1;
 		}
-		if (Input::MouseL.clicked)
-		{
-			return;
+		if (Input::MouseL.clicked) {
+			return transitTo;
 		}
 	}
 	else
 	{
 		isCursored = false;
-		brightnessChange = abs(brightnessChange);
+		brightnessChange = -abs(brightnessChange);
 	}
-	textColor.setRGB(brightness + brightnessChange);
+	textColor.setRGB(Clamp(static_cast<int>(textColor.r) + brightnessChange, 0, 255));
+	return Scene::None;
 }
 
 void UI_Button::draw() {
-	buttonText.draw(buttonArea.pos,textColor);
+	FontAsset(L"overDrive20")(buttonText).draw(buttonArea.pos, textColor);
 }

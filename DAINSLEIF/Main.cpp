@@ -80,7 +80,13 @@ void Main()
 
 	Player player;
 	Enemy enemy(MovePattern ::chase<Enemy>(player.get_position()));
-	UI_Button button_0(L"Game Start", { 80,320 });
+	Array<UI_Button> buttons
+	{
+		{ L"GameStart", Vec2{ 80,320 }, Scene::Stage },
+
+		{ L"Credit", Vec2{ 80,440 }, Scene::Credits },
+		{ L"Exit", Vec2{ 80,500 }, Scene::Exit }
+	};
 
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
@@ -282,9 +288,23 @@ void Main()
 							isTextAlpha = true;
 						}
 					}
+			title.draw(40, 100);
+
+			FontAsset(L"whiteBase10")(L"ver.0.0.1").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
+			FontAsset(L"migMixB20")(L"α").draw(720, 250 - FontAsset(L"migMixB20").ascent, Color(0, 0, 0));
+
+			for (int n = 0; n < buttons.size(); n++) {
+				auto newScene = buttons[n].update();
+				if (newScene != Scene::None) {
+					gamemode = newScene;
 				}
 				*/
 				
+				buttons[n].draw();
+			}
+
+
+
 
 			break;
 
@@ -347,6 +367,10 @@ void Main()
 
 
 			break;
+		}
+
+		case Scene::Exit: {
+			return;
 		}
 		}
 		void drawWindowFrame(); {
