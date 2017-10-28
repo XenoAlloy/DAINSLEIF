@@ -7,12 +7,10 @@ Player::Player()
 	: position{ 400, 500 }
 	, create_bullets_shape(BulletShape::quad)
 	, bullets_move{ MovePattern::straightForMouse<Bullet>(position) }
-	, velocity{}
-{
+	, velocity{} {
 }
 
-Player::~Player()
-{
+Player::~Player() {
 }
 
 
@@ -83,8 +81,7 @@ void Player::draw() {
 }
 
 void Player::shot() {
-	if (Input::MouseL.pressed)
-	{
+	if (Input::MouseL.pressed) {
 		if (shotCount > shotWait) {
 			auto bulletPosition = position + direction * 16;
 			GameManager::get_instance().bullets.push_back(
@@ -106,8 +103,7 @@ void Player::update() {
 
 	direction = (Mouse::Pos() - position).normalize();
 
-	if (Input::KeyShift.pressed)
-	{
+	if (Input::KeyShift.pressed) {
 		speed = Speed::SLOWER;
 		create_bullets_shape = BulletShape::circle;
 	}
@@ -117,20 +113,16 @@ void Player::update() {
 	}
 }
 
-void Player::damaged(int damage)
-{
+void Player::damaged(int damage) {
 	life -= damage;
 }
 
-const Vec2& Player::get_position() const
-{
+const Vec2& Player::get_position() const {
 	return position;
 }
-const Vec2& Player::get_direction() const
-{
+const Vec2& Player::get_direction() const {
 	return direction;
 }
-const double& Player::get_atan2() const
-{
+const double& Player::get_atan2() const {
 	return atan2(direction.x, -direction.y);
 }

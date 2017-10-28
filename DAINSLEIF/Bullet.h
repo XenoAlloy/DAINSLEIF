@@ -2,8 +2,7 @@
 #include <Siv3D.hpp>
 #include "BulletShape.hpp"
 
-class Bullet
-{
+class Bullet {
 	int power;
 	Vec2 position;
 	Vec2 direction;
@@ -15,7 +14,7 @@ class Bullet
 
 
 public:
-	Bullet(Vec2, std::function<Vec2(const Bullet&)>,BulletShape, Vec2 normalized_direction, double grouping);
+	Bullet(Vec2, std::function<Vec2(const Bullet&)>, BulletShape, Vec2 normalized_direction, double grouping);
 	~Bullet();
 
 	Bullet& operator=(const Bullet&) = default;

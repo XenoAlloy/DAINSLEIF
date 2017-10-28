@@ -5,15 +5,12 @@ UI_Button::UI_Button(String text, Vec2 position, Scene scene)
 	, buttonArea(FontAsset(L"overDrive20")(text).region(position))
 	, transitTo(scene) {
 }
-UI_Button::~UI_Button()
-{
+UI_Button::~UI_Button() {
 }
 
-	if (buttonArea.mouseOver)
-	{
-		if (!isCursored)
-		{
 Scene UI_Button::update() {
+	if (buttonArea.mouseOver) {
+		if (!isCursored) {
 			SoundAsset(L"cursor").playMulti();
 			textColor.setRGB(255);
 			isCursored = true;
@@ -25,8 +22,7 @@ Scene UI_Button::update() {
 			return transitTo;
 		}
 	}
-	else
-	{
+	else {
 		isCursored = false;
 		brightnessChange = -abs(brightnessChange);
 	}

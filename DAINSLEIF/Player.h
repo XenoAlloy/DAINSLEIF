@@ -2,8 +2,7 @@
 #include<Siv3D.hpp>
 #include "Bullet.h"
 
-class Player
-{
+class Player {
 	enum Speed {
 		HIGHER, SLOWER, COUNT
 	} speed;

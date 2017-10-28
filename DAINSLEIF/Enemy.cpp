@@ -3,38 +3,30 @@
 
 Enemy::Enemy(std::function<Vec2(const Enemy&)> move_pattern)
 	: _move(move_pattern)
-	, position{ 800, 100 }
-{
+	, position{ 800, 100 } {
 }
 
-Enemy::~Enemy()
-{
+Enemy::~Enemy() {
 }
 
 
-void Enemy::update() 
-{
+void Enemy::update() {
 }
 
-void Enemy::move() 
-{
+void Enemy::move() {
 	position += _move(*this);
 }
 
-void Enemy::draw() 
-{
-	Circle(position,50).draw(Color(255,0,0));
+void Enemy::draw() {
+	Circle(position, 50).draw(Color(255, 0, 0));
 }
 
-void Enemy::shot() 
-{
+void Enemy::shot() {
 }
 
-void Enemy::damaged(int damage) 
-{
+void Enemy::damaged(int damage) {
 }
 
-const Vec2 & Enemy::get_position() const
-{
+const Vec2 & Enemy::get_position() const {
 	return position;
 }

@@ -2,8 +2,7 @@
 # include "Scene.hpp"
 # pragma once
 
-class UI_Button
-{
+class UI_Button {
 	Color textColor = { 0,0,0 };
 	bool brightening = true;
 	bool isCursored = false;

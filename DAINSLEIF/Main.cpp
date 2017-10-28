@@ -5,52 +5,30 @@
 # include "Enemy.h"
 # include "MovePattern.hpp"
 # include "GameManager.h"
-void Main()
-{
+void Main() {
 	Window::SetTitle(L"DAINSLEIF");
 	Window::Resize(800, 600);
 	Window::SetStyle(WindowStyle::NonFrame);
 	Scene gamemode = Scene::Title;
 	Cursor::SetStyle(CursorStyle::None);
-	Color cursorColor = Color(50,205,50,210);
+	Color cursorColor = Color(50, 205, 50, 210);
 
 	// フォントファイルを一時的にインストール
 	//失敗した場合プログラムを終了する
-	if (!FontManager::Register(L"assets/font/GAU_Over_Drive.TTF"))
-	{
+	if (!FontManager::Register(L"assets/font/GAU_Over_Drive.TTF")) {
 		return;
 	}
-	if (!FontManager::Register(L"assets/font/GAU_White_Base.TTF"))
-	{
+	if (!FontManager::Register(L"assets/font/GAU_White_Base.TTF")) {
 		return;
 	}
-	if (!FontManager::Register(L"assets/font/migmix-1m-regular.ttf"))
-	{
+	if (!FontManager::Register(L"assets/font/migmix-1m-regular.ttf")) {
 		return;
 	}
-	if (!FontManager::Register(L"assets/font/migmix-1m-bold.ttf"))
-	{
+	if (!FontManager::Register(L"assets/font/migmix-1m-bold.ttf")) {
 		return;
 	}
-
 
 	//ゲーム中で使うフォントの用意
-	/*
-	const Font fontMin(14);
-	const Font migMixB40(40, L"MigMix 1M Bold");
-	const Font migMixB20(20, L"MigMix 1M Bold");
-	const Font migMixB10(10, L"MigMix 1M Bold");
-	const Font migMixR40(40, L"MigMix 1M Regular");
-	const Font migMixR20(20, L"MigMix 1M Regular");
-	const Font migMixR10(10, L"MigMix 1M Regular");
-	const Font overDrive40(40, L"GauFontOverDrive");
-	const Font overDrive20(20, L"GauFontOverDrive");
-	const Font overDrive10(10, L"GauFontOverDrive");
-	const Font whiteBase40(40, L"GauFontWhiteBase");
-	const Font whiteBase20(20, L"GauFontWhiteBase");
-	const Font whiteBase10(10, L"GauFontWhiteBase");
-	*/
-
 	for (int n = 40; n >= 10; n /= 2) {
 		FontAsset::Register(L"migMixB" + ToString(n), n, L"MigMix 1M Bold");
 		FontAsset::Register(L"migMixR" + ToString(n), n, L"MigMix 1M Regular");
@@ -58,18 +36,10 @@ void Main()
 		FontAsset::Register(L"whiteBase" + ToString(n), n, L"GauFontWhiteBase");
 	}
 
-	//const Sound cursor(L"assets/se/Cursor.wav");
+	//ゲーム中で使うサウンドの用意
 	SoundAsset::Register(L"cursor", L"assets/se/Cursor.wav");
 
-	//auto hoge = FontAsset(L"overDrive20")(L"GameStart");
-
-
 	const Texture title(L"assets/img/title.png");
-	/*
-	const Rect gameStart = FontAsset(L"overDrive20")(L"GameStart").region(80, 320);
-	const Rect credits = overDrive20(L"Credits").region(80, 440);
-	const Rect exit = overDrive20(L"Exit").region(80, 500);
-	*/
 
 	//メニュー関連
 	const Rect rect(0, 0, 800, 600);
@@ -79,7 +49,7 @@ void Main()
 	Point mousePos = Mouse::Pos();
 
 	Player player;
-	Enemy enemy(MovePattern ::chase<Enemy>(player.get_position()));
+	Enemy enemy(MovePattern::chase<Enemy>(player.get_position()));
 	Array<UI_Button> buttons
 	{
 		{ L"GameStart", Vec2{ 80,320 }, Scene::Stage },
@@ -93,20 +63,16 @@ void Main()
 
 	auto testCircle = Circle(Vec2(200, 200), 200);
 
-	while (System::Update())
-	{
+	while (System::Update()) {
 		void updateWindow(); {
 			//closeをクリックで閉じる
-			if (close.leftClicked)
-			{
+			if (close.leftClicked) {
 				System::Exit();
 			}
 			//ウインドウの移動
-			if (menubar.leftClicked)
-			{
+			if (menubar.leftClicked) {
 				// メニューをクリックしたらつかむ
-				if (menubarGrabbed == false)
-				{
+				if (menubarGrabbed == false) {
 					//メニューつかんでないときマウス座標更新
 					mousePos = Mouse::Pos();
 
@@ -114,13 +80,11 @@ void Main()
 				menubarGrabbed = true;
 
 			}
-			else if (Input::MouseL.released)
-			{
+			else if (Input::MouseL.released) {
 				// マウスのクリックが離されたら離す
 				menubarGrabbed = false;
 			}
-			else if (menubarGrabbed)
-			{
+			else if (menubarGrabbed) {
 				// つかんでいる間はマウスのポジションに
 				Window::SetPos(Mouse::ScreenPos() - mousePos);
 			}
@@ -129,165 +93,9 @@ void Main()
 		void drawWindow(); {
 			rect.draw(Color(255, 255, 255));
 		}
-		switch (gamemode)
-		{
+		switch (gamemode) {
 		case Scene::Title: {
 
-				title.draw(40,100);
-
-				FontAsset(L"whiteBase10")(L"ver.0.0.1").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
-				FontAsset(L"migMixB20")(L"α").draw(720, 250 - FontAsset(L"migMixB20").ascent, Color(0, 0, 0));
-
-				button_0.update();
-				button_0.draw();
-
-				/*void Cursor_0(); {
-					static int textAlpha = 255;
-					static bool isTextAlpha = true;
-					static bool isCursored = false;
-					gameStart.draw(Color(0, 0, 0, 0));
-					FontAsset(L"overDrive20")(L"GameStart").draw(80, 320, Color(0, 0, 0, textAlpha));
-					const bool isMouse = gameStart.mouseOver;
-					if (isMouse)
-					{
-						if (! isCursored)
-						{
-							cursor.playMulti();
-							textAlpha = 100;
-							isCursored = true;
-						}
-						if (textAlpha >= 255)
-						{
-							isTextAlpha = true;
-						}
-						else if (textAlpha <= 100)
-						{
-							isTextAlpha = false;
-						}
-						if (isTextAlpha == true)
-						{
-							textAlpha -= 5;
-						}
-						else
-						{
-							textAlpha += 5;
-						}
-						if (Input::MouseL.clicked)
-						{
-							gamemode = Scene::Stage;
-						}
-					}
-					else
-					{
-						isCursored = false;
-						if (textAlpha < 255)
-						{
-							textAlpha += 5;
-						}
-						else
-						{
-							isTextAlpha = true;
-						}
-					}
-				}
-				void Cursor_1();{}
-				void Cursor_2(); {
-					static int textAlpha = 255;
-					static bool isTextAlpha = true;
-					static bool isCursored = false;
-					credits.draw(Color(0, 0, 0, 0));
-					overDrive20(L"Credits").draw(80, 440, Color(0, 0, 0, textAlpha));
-					const bool isMouse = credits.mouseOver;
-					if (isMouse)
-					{
-						if (!isCursored)
-						{
-							cursor.playMulti();
-							textAlpha = 100;
-							isCursored = true;
-						}
-						if (textAlpha >= 255)
-						{
-							isTextAlpha = true;
-						}
-						else if (textAlpha <= 100)
-						{
-							isTextAlpha = false;
-						}
-						if (isTextAlpha == true)
-						{
-							textAlpha -= 5;
-						}
-						else
-						{
-							textAlpha += 5;
-						}
-						if (Input::MouseL.clicked)
-						{
-							gamemode = Scene::Credits;
-						}
-					}
-					else
-					{
-						isCursored = false;
-						if (textAlpha < 255)
-						{
-							textAlpha += 5;
-						}
-						else
-						{
-							isTextAlpha = true;
-						}
-					}
-				}
-				void Cursor_3(); {
-					static int textAlpha = 255;
-					static bool isTextAlpha = true;
-					static bool isCursored = false;
-					exit.draw(Color(0, 0, 0, 0));
-					overDrive20(L"Exit").draw(80, 500, Color(0, 0, 0, textAlpha));
-					const bool isMouse = exit.mouseOver;
-					if (isMouse)
-					{
-						if (!isCursored)
-						{
-							cursor.playMulti();
-							textAlpha = 100;
-							isCursored = true;
-						}
-						if (textAlpha >= 255)
-						{
-							isTextAlpha = true;
-						}
-						else if (textAlpha <= 100)
-						{
-							isTextAlpha = false;
-						}
-						if (isTextAlpha == true)
-						{
-							textAlpha -= 5;
-						}
-						else
-						{
-							textAlpha += 5;
-						}
-						if (Input::MouseL.clicked)
-						{
-							return;
-						}
-					}
-					else
-					{
-						isCursored = false;
-						if (textAlpha < 255)
-						{
-							textAlpha += 5;
-						}
-						else
-						{
-							isTextAlpha = true;
-						}
-					}
 			title.draw(40, 100);
 
 			FontAsset(L"whiteBase10")(L"ver.0.0.1").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
@@ -298,8 +106,6 @@ void Main()
 				if (newScene != Scene::None) {
 					gamemode = newScene;
 				}
-				*/
-				
 				buttons[n].draw();
 			}
 
@@ -310,7 +116,7 @@ void Main()
 
 		}
 
-		case Scene::Stage:{
+		case Scene::Stage: {
 			void updateGame(); {
 
 
@@ -335,8 +141,7 @@ void Main()
 
 					void checkcollision(); {
 						auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
-							[&testCircle](const Bullet& b) -> bool
-						{ return b.get_shape().intersects(testCircle); });
+							[&testCircle](const Bullet& b) -> bool { return b.get_shape().intersects(testCircle); });
 						manager.bullets.erase(remove_ptr, manager.bullets.end());
 					}
 				}
@@ -361,7 +166,7 @@ void Main()
 				break;
 
 			}
-			}
+		}
 
 		case Scene::Credits: {
 

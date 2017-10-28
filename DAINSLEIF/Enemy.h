@@ -1,7 +1,6 @@
 # pragma once
 # include <Siv3D.hpp>
-class Enemy
-{
+class Enemy {
 	int life;
 	Vec2 position;
 	int shapeType;
