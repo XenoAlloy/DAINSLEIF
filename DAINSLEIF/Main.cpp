@@ -57,13 +57,6 @@ void Main()
 	const Rect credits = overDrive20(L"Credits").region(80, 440);
 	const Rect exit = overDrive20(L"Exit").region(80, 500);
 
-	int textAlpha_0 = 255;
-	int textAlpha_2 = 255;
-	int textAlpha_3 = 255;
-	bool isTextAlpha_0 = true;
-	bool isTextAlpha_2 = true;
-	bool isTextAlpha_3 = true;
-
 
 	//メニュー関連
 	const Rect rect(0, 0, 800, 600);
@@ -125,119 +118,155 @@ void Main()
 				whiteBase10(L"ver.0.0.1").draw(600, 250 - whiteBase10.ascent, Color(0, 0, 0));
 				migMixB20(L"α").draw(720, 250 - migMixB20.ascent, Color(0, 0, 0));
 
-				gameStart.draw(Color(0, 0, 0, 0));
-				overDrive20(L"Game Start").draw(80, 320, Color(0, 0, 0, textAlpha_0));
-				credits.draw(Color(0, 0, 0, 0));
-				overDrive20(L"Credits").draw(80, 440, Color(0, 0, 0, textAlpha_2));
-				exit.draw(Color(0, 0, 0, 0));
-				overDrive20(L"Exit").draw(80, 500, Color(0, 0, 0, textAlpha_3));
+				void Cursor_0(); {
+					static int textAlpha = 255;
+					static bool isTextAlpha = true;
+					static bool isCursored = false;
+					gameStart.draw(Color(0, 0, 0, 0));
+					overDrive20(L"Game Start").draw(80, 320, Color(0, 0, 0, textAlpha));
+					const bool isMouse = gameStart.mouseOver;
+					if (isMouse)
+					{
+						if (! isCursored)
+						{
+							cursor.playMulti();
+							textAlpha = 100;
+							isCursored = true;
+						}
+						if (textAlpha >= 255)
+						{
+							isTextAlpha = true;
+						}
+						else if (textAlpha <= 100)
+						{
+							isTextAlpha = false;
+						}
+						if (isTextAlpha == true)
+						{
+							textAlpha -= 5;
+						}
+						else
+						{
+							textAlpha += 5;
+						}
+						if (Input::MouseL.clicked)
+						{
+							gamemode = Scene::Stage;
+						}
+					}
+					else
+					{
+						isCursored = false;
+						if (textAlpha < 255)
+						{
+							textAlpha += 5;
+						}
+						else
+						{
+							isTextAlpha = true;
+						}
+					}
+				}
+				void Cursor_1();{}
+				void Cursor_2(); {
+					static int textAlpha = 255;
+					static bool isTextAlpha = true;
+					static bool isCursored = false;
+					credits.draw(Color(0, 0, 0, 0));
+					overDrive20(L"Credits").draw(80, 440, Color(0, 0, 0, textAlpha));
+					const bool isMouse = credits.mouseOver;
+					if (isMouse)
+					{
+						if (!isCursored)
+						{
+							cursor.playMulti();
+							textAlpha = 100;
+							isCursored = true;
+						}
+						if (textAlpha >= 255)
+						{
+							isTextAlpha = true;
+						}
+						else if (textAlpha <= 100)
+						{
+							isTextAlpha = false;
+						}
+						if (isTextAlpha == true)
+						{
+							textAlpha -= 5;
+						}
+						else
+						{
+							textAlpha += 5;
+						}
+						if (Input::MouseL.clicked)
+						{
+							gamemode = Scene::Credits;
+						}
+					}
+					else
+					{
+						isCursored = false;
+						if (textAlpha < 255)
+						{
+							textAlpha += 5;
+						}
+						else
+						{
+							isTextAlpha = true;
+						}
+					}
+				}
+				void Cursor_3(); {
+					static int textAlpha = 255;
+					static bool isTextAlpha = true;
+					static bool isCursored = false;
+					exit.draw(Color(0, 0, 0, 0));
+					overDrive20(L"Exit").draw(80, 500, Color(0, 0, 0, textAlpha));
+					const bool isMouse = exit.mouseOver;
+					if (isMouse)
+					{
+						if (!isCursored)
+						{
+							cursor.playMulti();
+							textAlpha = 100;
+							isCursored = true;
+						}
+						if (textAlpha >= 255)
+						{
+							isTextAlpha = true;
+						}
+						else if (textAlpha <= 100)
+						{
+							isTextAlpha = false;
+						}
+						if (isTextAlpha == true)
+						{
+							textAlpha -= 5;
+						}
+						else
+						{
+							textAlpha += 5;
+						}
+						if (Input::MouseL.clicked)
+						{
+							return;
+						}
+					}
+					else
+					{
+						isCursored = false;
+						if (textAlpha < 255)
+						{
+							textAlpha += 5;
+						}
+						else
+						{
+							isTextAlpha = true;
+						}
+					}
+				}
 
-				const bool isMouse_0 = gameStart.mouseOver;
-				const bool isMouse_2 = credits.mouseOver;
-				const bool isMouse_3 = exit.mouseOver;
-
-				if(isMouse_0)
-				{
-					if (textAlpha_0 >= 255)
-					{
-						isTextAlpha_0 = true;
-					}
-					else if (textAlpha_0 <= 100)
-					{
-						isTextAlpha_0 = false;
-					}
-					if (isTextAlpha_0 == true)
-					{
-						textAlpha_0 -= 5;
-					}
-					else if (isTextAlpha_0 == false)
-					{
-						textAlpha_0 += 5;
-					}
-					if (Input::MouseL.clicked)
-					{
-						gamemode = Scene::Stage;
-					}
-				}
-				else if(! isMouse_0)
-				{
-					if (textAlpha_0 < 255)
-					{
-						textAlpha_0 += 5;
-					}
-					if (textAlpha_0 >= 255)
-					{
-						isTextAlpha_0 = true;
-					}
-				}
-				if (isMouse_2)
-				{
-					if (textAlpha_2 >= 255)
-					{
-						isTextAlpha_2 = true;
-					}
-					else if (textAlpha_2 <= 100)
-					{
-						isTextAlpha_2 = false;
-					}
-					if (isTextAlpha_2 == true)
-					{
-						textAlpha_2 -= 5;
-					}
-					else if (isTextAlpha_2 == false)
-					{
-						textAlpha_2 += 5;
-					}
-					if (Input::MouseL.clicked)
-					{
-						gamemode = Scene::Credits;
-					}
-				}
-				else if (!isMouse_2)
-				{
-					if (textAlpha_2 < 255)
-					{
-						textAlpha_2 += 5;
-					}
-					if (textAlpha_2 >= 255)
-					{
-						isTextAlpha_2 = true;
-					}
-				}
-				if (isMouse_3)
-				{
-					if (textAlpha_3 >= 255)
-					{
-						isTextAlpha_3 = true;
-					}
-					else if (textAlpha_3 <= 100)
-					{
-						isTextAlpha_3 = false;
-					}
-					if (isTextAlpha_3 == true)
-					{
-						textAlpha_3 -= 5;
-					}
-					else if (isTextAlpha_3 == false)
-					{
-						textAlpha_3 += 5;
-					}
-					if (Input::MouseL.clicked)
-					{
-						return;
-					}
-				}
-				else if (!isMouse_3)
-				{
-					if (textAlpha_3 < 255)
-					{
-						textAlpha_3 += 5;
-					}
-					if (textAlpha_3 >= 255)
-					{
-						isTextAlpha_3 = true;
-					}
-				}
 				
 
 			break;
