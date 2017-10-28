@@ -15,8 +15,7 @@ class Bullet
 
 
 public:
-	Bullet(Vec2, std::function<Vec2(const Bullet&)>,
-		BulletShape, Vec2 normalized_direction, double grouping);
+	Bullet(Vec2, std::function<Vec2(const Bullet&)>,BulletShape, Vec2 normalized_direction, double grouping);
 	~Bullet();
 
 	Bullet& operator=(const Bullet&) = default;

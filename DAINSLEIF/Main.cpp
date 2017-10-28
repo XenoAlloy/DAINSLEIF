@@ -1,5 +1,6 @@
 ﻿# include <Siv3D.hpp>
 # include "Scene.hpp"
+# include "UI_Button.h"
 # include "Player.h"
 # include "Enemy.h"
 # include "MovePattern.hpp"
@@ -34,6 +35,7 @@ void Main()
 
 
 	//ゲーム中で使うフォントの用意
+	/*
 	const Font fontMin(14);
 	const Font migMixB40(40, L"MigMix 1M Bold");
 	const Font migMixB20(20, L"MigMix 1M Bold");
@@ -47,16 +49,27 @@ void Main()
 	const Font whiteBase40(40, L"GauFontWhiteBase");
 	const Font whiteBase20(20, L"GauFontWhiteBase");
 	const Font whiteBase10(10, L"GauFontWhiteBase");
+	*/
 
+	for (int n = 40; n >= 10; n /= 2) {
+		FontAsset::Register(L"migMixB" + ToString(n), n, L"MigMix 1M Bold");
+		FontAsset::Register(L"migMixR" + ToString(n), n, L"MigMix 1M Regular");
+		FontAsset::Register(L"overDrive" + ToString(n), n, L"GauFontOverDrive");
+		FontAsset::Register(L"whiteBase" + ToString(n), n, L"GauFontWhiteBase");
+	}
 
-	const Sound cursor(L"assets/se/Cursor.wav");
+	//const Sound cursor(L"assets/se/Cursor.wav");
+	SoundAsset::Register(L"cursor", L"assets/se/Cursor.wav");
+
+	//auto hoge = FontAsset(L"overDrive20")(L"GameStart");
 
 
 	const Texture title(L"assets/img/title.png");
-	const Rect gameStart = overDrive20(L"Game Start").region(80, 320);
+	/*
+	const Rect gameStart = FontAsset(L"overDrive20")(L"GameStart").region(80, 320);
 	const Rect credits = overDrive20(L"Credits").region(80, 440);
 	const Rect exit = overDrive20(L"Exit").region(80, 500);
-
+	*/
 
 	//メニュー関連
 	const Rect rect(0, 0, 800, 600);
@@ -67,6 +80,7 @@ void Main()
 
 	Player player;
 	Enemy enemy(MovePattern ::chase<Enemy>(player.get_position()));
+	UI_Button button_0(L"Game Start", { 80,320 });
 
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
@@ -115,15 +129,18 @@ void Main()
 
 				title.draw(40,100);
 
-				whiteBase10(L"ver.0.0.1").draw(600, 250 - whiteBase10.ascent, Color(0, 0, 0));
-				migMixB20(L"α").draw(720, 250 - migMixB20.ascent, Color(0, 0, 0));
+				FontAsset(L"whiteBase10")(L"ver.0.0.1").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
+				FontAsset(L"migMixB20")(L"α").draw(720, 250 - FontAsset(L"migMixB20").ascent, Color(0, 0, 0));
 
-				void Cursor_0(); {
+				button_0.update();
+				button_0.draw();
+
+				/*void Cursor_0(); {
 					static int textAlpha = 255;
 					static bool isTextAlpha = true;
 					static bool isCursored = false;
 					gameStart.draw(Color(0, 0, 0, 0));
-					overDrive20(L"Game Start").draw(80, 320, Color(0, 0, 0, textAlpha));
+					FontAsset(L"overDrive20")(L"GameStart").draw(80, 320, Color(0, 0, 0, textAlpha));
 					const bool isMouse = gameStart.mouseOver;
 					if (isMouse)
 					{
@@ -266,7 +283,7 @@ void Main()
 						}
 					}
 				}
-
+				*/
 				
 
 			break;
@@ -344,7 +361,7 @@ void Main()
 			Line(778, 8, 792, 22).draw(2);
 			Line(792, 8, 778, 22).draw(2);
 
-			fontMin(player.get_position()).draw();
+			FontAsset(L"migMixR10")(player.get_position()).draw();
 		}
 
 		void drawMouseCursor(); {

@@ -168,6 +168,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="UI_Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
@@ -289,6 +290,7 @@
     <ClInclude Include="MovePattern.hpp" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.hpp" />
+    <ClInclude Include="UI_Button.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
