@@ -49,6 +49,9 @@ void Main()
 	const Font whiteBase10(10, L"GauFontWhiteBase");
 
 
+	const Sound cursor(L"assets/se/Cursor.wav");
+
+
 	const Texture title(L"assets/img/title.png");
 	const Rect gameStart = overDrive20(L"Game Start").region(80, 320);
 	const Rect credits = overDrive20(L"Credits").region(80, 440);
