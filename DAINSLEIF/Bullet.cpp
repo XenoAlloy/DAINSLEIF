@@ -22,10 +22,22 @@ void Bullet::draw() {
 	shape.draw(Color(0, 255, 200, 220));
 }
 
-double Bullet::get_angle() const {
+void Bullet::damaged() {
+	life -= 1;
+}
+
+const bool Bullet::killed()const {
+	return life <= 0;
+}
+
+const double Bullet::get_angle() const {
 	return atan2(direction.x, -direction.y);
 }
 
 const BulletShape& Bullet::get_shape() const {
 	return shape;
+}
+
+const int Bullet::get_power()const {
+	return power;
 }

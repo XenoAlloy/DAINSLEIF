@@ -1,5 +1,6 @@
 #pragma once
 #include "Bullet.h"
+#include "Enemy.h"
 
 class GameManager {
 private:
@@ -8,6 +9,7 @@ private:
 
 public:
 	Array<Bullet> bullets;
+	Array<Enemy> enemies;
 	int score;
 
 	GameManager(const GameManager&) = delete;

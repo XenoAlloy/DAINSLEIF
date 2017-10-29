@@ -1,18 +1,20 @@
 # pragma once
 # include <Siv3D.hpp>
 class Enemy {
-	int life;
+	int life = 10;
+	int power = 300;
 	Vec2 position;
 	int shapeType;
 	int bulletType;
 	int moveType;
-
 	std::function<Vec2(const Enemy &)> _move;
+	Circle shape;
 
 public:
 
-	Enemy(std::function<Vec2(const Enemy&)>);
+	Enemy(/*Circle,*/std::function<Vec2(const Enemy&)>);
 	~Enemy();
+
 
 	void update();
 	void move();
@@ -21,5 +23,8 @@ public:
 	void damaged(int damage);
 
 	const Vec2 & get_position() const;
+	const Circle& get_shape() const;
+	const int get_power() const;
+	const bool killed()const;
 };
 

@@ -117,12 +117,21 @@ void Player::damaged(int damage) {
 	life -= damage;
 }
 
+const bool Player::killed() const {
+	return life <= 0;
+}
 const Vec2& Player::get_position() const {
 	return position;
 }
 const Vec2& Player::get_direction() const {
 	return direction;
 }
-const double& Player::get_atan2() const {
+const double Player::get_atan2() const {
 	return atan2(direction.x, -direction.y);
+}
+const Circle Player::get_shape() const {
+	return Circle(position, size);
+}
+const int Player::get_power()const {
+	return power;
 }

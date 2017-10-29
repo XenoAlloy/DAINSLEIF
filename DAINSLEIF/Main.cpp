@@ -49,9 +49,12 @@ void Main() {
 	Point mousePos = Mouse::Pos();
 
 	Player player;
-	Enemy enemy(MovePattern::chase<Enemy>(player.get_position()));
-	Array<UI_Button> buttons
-	{
+	GameManager::get_instance().enemies.push_back(
+		Enemy(
+			MovePattern::chase<Enemy>(player.get_position())
+		)
+	);
+	Array<UI_Button> buttons{
 		{ L"GameStart", Vec2{ 80,320 }, Scene::Stage },
 
 		{ L"Credit", Vec2{ 80,440 }, Scene::Credits },
@@ -122,9 +125,11 @@ void Main() {
 
 				if (menubarGrabbed == false) {
 					void updateEnemy(); {
-						enemy.update();
-						enemy.move();
-						enemy.shot();
+						for (auto& e : manager.enemies) {
+							e.update();
+							e.move();
+							e.shot();
+						}
 					}
 					void updatePlayer(); {
 						player.update();
@@ -140,16 +145,38 @@ void Main() {
 					}
 
 					void checkcollision(); {
-						auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
-							[&testCircle](const Bullet& b) -> bool { return b.get_shape().intersects(testCircle); });
+						//auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
+						//	[&testCircle](const Bullet& b) -> bool { return b.get_shape().intersects(testCircle); });
+						//manager.bullets.erase(remove_ptr, manager.bullets.end());
+						for (auto& e : manager.enemies) {
+							if (e.get_shape().intersects(player.get_shape())) {
+								player.damaged(e.get_power());
+								e.damaged(player.get_power());
+							}
+							for (auto& b : manager.bullets) {
+								if (b.get_shape().intersects(e.get_shape())) {
+									e.damaged(b.get_power());
+									b.damaged();
+								}
+							}
+						}
+						{auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
+							[](const Bullet& b) -> bool { return b.killed(); });
 						manager.bullets.erase(remove_ptr, manager.bullets.end());
+						}
+						{auto remove_ptr = std::remove_if(manager.enemies.begin(), manager.enemies.end(),
+							[](const Enemy& e) -> bool { return e.killed(); });
+						manager.enemies.erase(remove_ptr, manager.enemies.end());
+						}
 					}
 				}
 
 			}
 			void drawGame(); {
 				void drawEnemy(); {
-					enemy.draw();
+					for (auto& e : manager.enemies) {
+						e.draw();
+					}
 				}
 				void drawPlayer(); {
 					player.draw();

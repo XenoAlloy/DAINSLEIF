@@ -12,6 +12,7 @@ class Player {
 	int equipBulletA = 0;
 
 	int size = 6;
+	int power = 10;
 
 	Vec2 position;
 	Vec2 velocity;
@@ -24,8 +25,8 @@ class Player {
 	int shotCount = 0;
 	Vec2 direction;
 	double grouping = 0.1;
-	int life;
-	int maxLife;
+	int life = 12000;
+	int maxLife = 12000;
 
 	std::function<Vec2(const Bullet &)> bullets_move;
 	std::function<BulletShape(Vec2, float)> create_bullets_shape;
@@ -43,5 +44,8 @@ public:
 
 	const Vec2& get_position() const;
 	const Vec2& get_direction() const;
-	const double& get_atan2() const;
+	const double get_atan2() const;
+	const Circle get_shape() const;
+	const int get_power() const;
+	const bool killed() const;
 };
