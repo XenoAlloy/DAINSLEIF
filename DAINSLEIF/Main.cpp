@@ -68,7 +68,7 @@ void Main() {
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
 
-	auto testCircle = Circle(Vec2(200, 200), 200);
+	//auto testCircle = Circle(Vec2(200, 200), 200);
 
 	while (System::Update()) {
 		void updateWindow(); {
@@ -195,7 +195,7 @@ void Main() {
 					}
 				}
 
-				testCircle.draw(Color(255, 0, 0, 80));
+				//				testCircle.draw(Color(255, 0, 0, 80));
 				break;
 
 			}
