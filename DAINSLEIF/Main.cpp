@@ -108,6 +108,8 @@ void Main() {
 		switch (gamemode) {
 		case Scene::Title: {
 
+			SoundAsset(L"BGM_Keybords Brawl Dance").setVolume(0.1);
+			SoundAsset(L"BGM_Keybords Brawl Dance").play();
 			title.draw(40, 100);
 
 			FontAsset(L"whiteBase10")(L"ver.0.0.1").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
@@ -116,6 +118,7 @@ void Main() {
 			for (int n = 0; n < buttons.size(); n++) {
 				auto newScene = buttons[n].update();
 				if (newScene != Scene::None) {
+					SoundAsset(L"BGM_Keybords Brawl Dance").stop(1.0s);
 					fadeAlpha = 255;
 					gamemode = newScene;
 				}
@@ -130,6 +133,8 @@ void Main() {
 		}
 
 		case Scene::Stage: {
+			SoundAsset(L"BGM_Bustle of Ghosts").setVolume(0.1);
+			SoundAsset(L"BGM_Bustle of Ghosts").play();
 			void updateGame(); {
 
 
