@@ -40,15 +40,32 @@
 64826	FILE	"Engine/Shaders/D3D11/FXAA_Q39.ps"
 
 // Optional
-64040	FILE	"Engine/Objdetect/facePhoto.zip"
-64041	FILE	"Engine/Objdetect/faceAnime.zip"
-64601	FILE	"Engine/Fonts/mplus-1p-thin.zip"
-64602	FILE	"Engine/Fonts/mplus-1p-light.zip"
-64603	FILE	"Engine/Fonts/mplus-1p-regular.zip"
-64605	FILE	"Engine/Fonts/mplus-1p-bold.zip"
-64606	FILE	"Engine/Fonts/mplus-1p-heavy.zip"
-64607	FILE	"Engine/Fonts/mplus-1p-black.zip"
+//64040	FILE	"Engine/Objdetect/facePhoto.zip"
+//64041	FILE	"Engine/Objdetect/faceAnime.zip"
+//64601	FILE	"Engine/Fonts/mplus-1p-thin.zip"
+//64602	FILE	"Engine/Fonts/mplus-1p-light.zip"
+//64603	FILE	"Engine/Fonts/mplus-1p-regular.zip"
+//64605	FILE	"Engine/Fonts/mplus-1p-bold.zip"
+//64606	FILE	"Engine/Fonts/mplus-1p-heavy.zip"
+//64607	FILE	"Engine/Fonts/mplus-1p-black.zip"
 
 // App Resource
 100		ICON	"Icon.ico"
 101		FILE	"Engine/Splash.png"
+
+// img 1000~1499
+1000	FILE	"assets/img/Title.png"
+
+// font 1500~1599
+1500	FILE	"assets/font/GAU_Over_Drive.TTF"
+1501	FILE	"assets/font/GAU_White_base.TTF"
+1502	FILE	"assets/font/migmix-1m-regular.ttf"
+1503	FILE	"assets/font/migmix-1m-bold.ttf"
+
+// bgm 2000~2999
+2000	FILE	"assets/bgm/Keybords_brawl_dance.wav"
+2001	FILE	"assets/bgm/Bustle_of_ghosts.wav"
+
+// se 3000~3499
+3000	FILE	"assets/se/Cursor.wav"
+3020	FILE	"assets/se/Warning.wav"

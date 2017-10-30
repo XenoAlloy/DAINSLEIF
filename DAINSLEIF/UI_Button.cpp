@@ -11,7 +11,7 @@ UI_Button::~UI_Button() {
 Scene UI_Button::update() {
 	if (buttonArea.mouseOver) {
 		if (!isCursored) {
-			SoundAsset(L"cursor").playMulti();
+			SoundAsset(L"SE_Cursor").playMulti();
 			textColor.setRGB(255);
 			isCursored = true;
 		}

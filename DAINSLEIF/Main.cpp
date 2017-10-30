@@ -15,16 +15,16 @@ void Main() {
 
 	// フォントファイルを一時的にインストール
 	//失敗した場合プログラムを終了する
-	if (!FontManager::Register(L"assets/font/GAU_Over_Drive.TTF")) {
+	if (!FontManager::Register(L"/1500")) {
 		return;
 	}
-	if (!FontManager::Register(L"assets/font/GAU_White_Base.TTF")) {
+	if (!FontManager::Register(L"/1501")) {
 		return;
 	}
-	if (!FontManager::Register(L"assets/font/migmix-1m-regular.ttf")) {
+	if (!FontManager::Register(L"/1502")) {
 		return;
 	}
-	if (!FontManager::Register(L"assets/font/migmix-1m-bold.ttf")) {
+	if (!FontManager::Register(L"/1503")) {
 		return;
 	}
 
@@ -37,9 +37,12 @@ void Main() {
 	}
 
 	//ゲーム中で使うサウンドの用意
-	SoundAsset::Register(L"cursor", L"assets/se/Cursor.wav");
+	SoundAsset::Register(L"SE_Cursor", L"/3000");
+	SoundAsset::Register(L"SE_Warning", L"/3020");
+	SoundAsset::Register(L"BGM_Keybords Brawl Dance", L"/2000");
+	SoundAsset::Register(L"BGM_Bustle of Ghosts", L"/2001");
 
-	const Texture title(L"assets/img/title.png");
+	const Texture title(L"/1000");
 
 	//メニュー関連
 	const Rect rect(0, 0, 800, 600);
