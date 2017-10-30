@@ -31,10 +31,10 @@ void Main() {
 
 	//ゲーム中で使うフォントの用意
 	for (int n = 40; n >= 10; n /= 2) {
-		FontAsset::Register(L"migMixB" + ToString(n), n, L"MigMix 1M Bold");
-		FontAsset::Register(L"migMixR" + ToString(n), n, L"MigMix 1M Regular");
 		FontAsset::Register(L"overDrive" + ToString(n), n, L"GauFontOverDrive");
 		FontAsset::Register(L"whiteBase" + ToString(n), n, L"GauFontWhiteBase");
+		FontAsset::Register(L"migMixR" + ToString(n), n, L"MigMix 1M Regular");
+		FontAsset::Register(L"migMixB" + ToString(n), n, L"MigMix 1M Bold");
 	}
 	FontAsset::Register(L"overDrive6", 6, L"GauFontOverDrive");
 
@@ -53,6 +53,8 @@ void Main() {
 	const Rect close(774, 4, 22, 22);
 	bool menubarGrabbed = false;
 	Point mousePos = Mouse::Pos();
+
+	bool continueGame = true;
 
 	Player player;
 	GameManager::get_instance().enemies.push_back(
@@ -87,20 +89,19 @@ void Main() {
 				if (menubarGrabbed == false) {
 					//メニューつかんでないときマウス座標更新
 					mousePos = Mouse::Pos();
-
 				}
 				menubarGrabbed = true;
-
+				continueGame = false;
 			}
 			else if (Input::MouseL.released) {
 				// マウスのクリックが離されたら離す
 				menubarGrabbed = false;
+				continueGame = true;
 			}
 			else if (menubarGrabbed) {
 				// つかんでいる間はマウスのポジションに
 				Window::SetPos(Mouse::ScreenPos() - mousePos);
 			}
-
 		}
 		void drawWindow(); {
 			rect.draw(Color(255, 255, 255));
@@ -129,92 +130,77 @@ void Main() {
 
 
 			break;
-
 		}
 
 		case Scene::Stage: {
 			SoundAsset(L"BGM_Bustle of Ghosts").setVolume(0.1);
 			SoundAsset(L"BGM_Bustle of Ghosts").play();
 			void updateGame(); {
-
-
-				if (menubarGrabbed == false) {
-					void updateEnemy(); {
-						for (auto& e : manager.enemies) {
-							e.update();
-							e.move();
-							e.shot();
-						}
-					}
-					void updatePlayer(); {
-						player.update();
-						player.update_UI();
-						player.move();
-						player.shot();
-					}
-					void updateEneBullet(); {
-					}
-					void updatePlaBullet(); {
-						for (auto& b : manager.bullets) {
-							b.update();
-						}
-					}
-
-					void checkcollision(); {
-						//auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
-						//	[&testCircle](const Bullet& b) -> bool { return b.get_shape().intersects(testCircle); });
-						//manager.bullets.erase(remove_ptr, manager.bullets.end());
-						for (auto& e : manager.enemies) {
-							if (e.get_shape().intersects(player.get_shape())) {
-								player.damaged(e.get_power());
-								e.damaged(player.get_power());
-							}
-							for (auto& b : manager.bullets) {
-								if (b.get_shape().intersects(e.get_shape())) {
-									e.damaged(b.get_power());
-									b.damaged();
-								}
-							}
-						}
-						{auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
-							[](const Bullet& b) -> bool { return b.killed(); });
-						manager.bullets.erase(remove_ptr, manager.bullets.end());
-						}
-						{auto remove_ptr = std::remove_if(manager.enemies.begin(), manager.enemies.end(),
-							[](const Enemy& e) -> bool { return e.killed(); });
-						manager.enemies.erase(remove_ptr, manager.enemies.end());
-						}
-					}
-				}
-
-			}
-			void drawGame(); {
-				void drawEnemy(); {
+				if (continueGame) {
+					//update_player
+					player.update_UI();
+					player.update();
+					player.move();
+					player.shot();
+					//update_enemies
 					for (auto& e : manager.enemies) {
-						e.draw();
+						e.update();
+						e.move();
+						e.shot();
+					}
+					//update_bullets
+					for (auto& b : manager.bullets) {
+						b.update();
+					}
+					//check_collision
+						/*	auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
+								[&testCircle](const Bullet& b) -> bool { return b.get_shape().intersects(testCircle); });
+							manager.bullets.erase(remove_ptr, manager.bullets.end());
+						*/
+					for (auto& e : manager.enemies) {
+						if (e.get_shape().intersects(player.get_shape())) {
+							player.damaged(e.get_power());
+							e.damaged(player.get_power());
+						}
+						for (auto& b : manager.bullets) {
+							if (b.get_shape().intersects(e.get_shape())) {
+								e.damaged(b.get_power());
+								b.damaged();
+							}
+						}
+					}
+					{auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
+						[](const Bullet& b) -> bool { return b.killed(); });
+					manager.bullets.erase(remove_ptr, manager.bullets.end());
+					}
+					{auto remove_ptr = std::remove_if(manager.enemies.begin(), manager.enemies.end(),
+						[](const Enemy& e) -> bool { return e.killed(); });
+					manager.enemies.erase(remove_ptr, manager.enemies.end());
 					}
 					if (player.killed()) {
 						SoundAsset(L"BGM_Bustle of Ghosts").stop(2.0s);
 						gamemode = Scene::Result;
 					}
 				}
+				if (Input::KeyE.clicked) {
+					continueGame = false;
 				}
-				void drawPlayer(); {
-					player.draw();
+				if (!continueGame) {
+					//ポーズ画面
 				}
-				void drawEneBullet(); {
-				player.draw_UI();
-				}
-				void drawPlaBullet(); {
-					for (auto& b : manager.bullets) {
-						b.draw();
-					}
-				}
-
-				//				testCircle.draw(Color(255, 0, 0, 80));
-				break;
-
 			}
+			void drawGame(); {
+				player.draw_UI();
+				player.draw();
+				for (auto& e : manager.enemies) {
+					e.draw();
+				}
+				for (auto& b : manager.bullets) {
+					b.draw();
+				}
+				//				testCircle.draw(Color(255, 0, 0, 80));
+			}
+			break;
 		}
 
 		case Scene::Result: {
