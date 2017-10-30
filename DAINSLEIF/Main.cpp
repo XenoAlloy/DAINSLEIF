@@ -207,9 +207,14 @@ void Main() {
 			}
 		}
 
+
+
 		case Scene::Credits: {
-
-
+			FontAsset(L"migMixR20")(L"DAINSLEIF\n企画 Xenon\n制作 Xenon いるやん\nBGM DIG\nSE Xenon\n\n\n\n\n\n\n\nTHANK YOU FOR PLAYING!!").draw(40, 40, Color(0, 0, 0));
+			if (Input::MouseL.clicked) {
+				fadeAlpha = 255;
+				gamemode = Scene::Title;
+			}
 			break;
 		}
 
