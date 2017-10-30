@@ -69,3 +69,4 @@
 // se 3000~3499
 3000	FILE	"assets/se/Cursor.wav"
 3020	FILE	"assets/se/Warning.wav"
+3021	FILE	"assets/se/Death.wav"

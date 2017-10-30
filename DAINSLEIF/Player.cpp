@@ -125,6 +125,10 @@ void Player::shot() {
 				energy -= 150;
 				shotCount = 0;
 			}
+			else {
+				SoundAsset(L"SE_Warning").setVolume(0, 4);
+				SoundAsset(L"SE_Warning").play();
+			}
 		}
 	}
 }
@@ -150,6 +154,14 @@ void Player::update_UI() {
 }
 void Player::damaged(int damage) {
 	life -= damage;
+	if ((double)life / maxLife <= 0.20) {
+		SoundAsset(L"SE_Warning").setVolume(0, 4);
+		SoundAsset(L"SE_Warning").play();
+	}
+	if (life <= 0) {
+		SoundAsset(L"SE_Death").setVolume(0, 4);
+		SoundAsset(L"SE_Death").play();
+	}
 }
 const bool Player::killed() const {
 	return life <= 0;

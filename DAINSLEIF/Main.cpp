@@ -40,6 +40,7 @@ void Main() {
 	//ゲーム中で使うサウンドの用意
 	SoundAsset::Register(L"SE_Cursor", L"/3000");
 	SoundAsset::Register(L"SE_Warning", L"/3020");
+	SoundAsset::Register(L"SE_Death", L"/3021");
 	SoundAsset::Register(L"BGM_Keybords Brawl Dance", L"/2000");
 	SoundAsset::Register(L"BGM_Bustle of Ghosts", L"/2001");
 
