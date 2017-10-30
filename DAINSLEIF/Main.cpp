@@ -193,6 +193,11 @@ void Main() {
 					for (auto& e : manager.enemies) {
 						e.draw();
 					}
+					if (player.killed()) {
+						SoundAsset(L"BGM_Bustle of Ghosts").stop(2.0s);
+						gamemode = Scene::Result;
+					}
+				}
 				}
 				void drawPlayer(); {
 					player.draw();
@@ -212,7 +217,9 @@ void Main() {
 			}
 		}
 
+		case Scene::Result: {
 
+		}
 
 		case Scene::Credits: {
 			FontAsset(L"migMixR20")(L"DAINSLEIF\n企画 Xenon\n制作 Xenon いるやん\nBGM DIG\nSE Xenon\n\n\n\n\n\n\n\nTHANK YOU FOR PLAYING!!").draw(40, 40, Color(0, 0, 0));
