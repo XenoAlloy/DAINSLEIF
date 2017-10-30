@@ -79,44 +79,78 @@ void Player::draw() {
 		.draw(Color(0, 255, 200, (Input::KeyShift.pressed) * 255))
 		.drawFrame(1, 0, Color(0, 0, 0, (Input::KeyShift.pressed) * 150));
 }
-
+void Player::draw_UI() {
+	//UI_EN
+	FontAsset(L"overDrive6")(L"EN:", energy, L"/", maxEnergy)
+		.draw(UI_position + Vec2{ 46, -60 }, Color(255 - 255 * ((double)energy / maxEnergy), 0, 0));
+	Line(UI_position + Vec2{ 0, -40 }, UI_position + Vec2{ 30 + 200 * ((double)energy / maxEnergy) , -40 })
+		.draw(10, Color(0, 0, 0));
+	//UI_AP
+	Circle(UI_position, 60)
+		.draw(Color(0, 0, 0));
+	Circle(UI_position, 60)
+		.drawFrame(2, 4, Color(0, 0, 0))
+		.drawPie(0.0, -2.0*Pi*((double)life / maxLife), Color(255 - 255 * ((double)life / maxLife), 255 * ((double)life / maxLife), 200 * ((double)life / maxLife)));
+	Circle(UI_position, 40)
+		.draw(Color(255, 255, 255));
+	FontAsset(L"overDrive6")(L"  AP\n", life)
+		.drawCenter(UI_position, Color(0, 0, 0));
+}
 void Player::shot() {
 	if (Input::MouseL.pressed) {
 		if (shotCount > shotWait) {
-			auto bulletPosition = position + direction * 16;
-			GameManager::get_instance().bullets.push_back(
-				Bullet(
-					bulletPosition,
-					bullets_move,
-					create_bullets_shape(bulletPosition, static_cast<float>(atan2(direction.x, -direction.y))),
-					direction,
-					grouping
-				)
-			);
-			shotCount = 0;
+			if (energy >= 300 - 150 * Input::KeyShift.pressed) {
+				auto bulletPosition = position + direction * 16;
+				GameManager::get_instance().bullets.push_back(
+					Bullet(
+						bulletPosition,
+						bullets_move,
+						create_bullets_shape(bulletPosition, static_cast<float>(atan2(direction.x, -direction.y))),
+						direction,
+						grouping
+					)
+				);
+				if (!Input::KeyShift.pressed) {
+					GameManager::get_instance().bullets.push_back(
+						Bullet(
+							bulletPosition,
+							bullets_move,
+							create_bullets_shape(bulletPosition, static_cast<float>(atan2(direction.x, -direction.y))),
+							direction,
+							grouping
+						)
+					);
+					energy -= 150;
+				}
+				energy -= 150;
+				shotCount = 0;
+			}
 		}
 	}
 }
-
 void Player::update() {
 	shotCount += 1;
-
 	direction = (Mouse::Pos() - position).normalize();
-
 	if (Input::KeyShift.pressed) {
 		speed = Speed::SLOWER;
 		create_bullets_shape = BulletShape::circle;
+		energy += 10;
 	}
 	else {
 		speed = Speed::HIGHER;
 		create_bullets_shape = BulletShape::quad;
 	}
+	energy += 5;
+	if (energy >= maxEnergy) {
+		energy = maxEnergy;
+	}
 }
+void Player::update_UI() {
 
+}
 void Player::damaged(int damage) {
 	life -= damage;
 }
-
 const bool Player::killed() const {
 	return life <= 0;
 }

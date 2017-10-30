@@ -27,6 +27,10 @@ class Player {
 	double grouping = 0.1;
 	int life = 12000;
 	int maxLife = 12000;
+	int energy = 10000;
+	int maxEnergy = 10000;
+
+	Vec2 UI_position = { 100, 100 };
 
 	std::function<Vec2(const Bullet &)> bullets_move;
 	std::function<BulletShape(Vec2, float)> create_bullets_shape;
@@ -37,8 +41,10 @@ public:
 	~Player();
 
 	void update();
+	void update_UI();
 	void move();
 	void draw();
+	void draw_UI();
 	void shot();
 	void damaged(int damage);
 

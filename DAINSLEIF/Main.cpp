@@ -35,6 +35,7 @@ void Main() {
 		FontAsset::Register(L"overDrive" + ToString(n), n, L"GauFontOverDrive");
 		FontAsset::Register(L"whiteBase" + ToString(n), n, L"GauFontWhiteBase");
 	}
+	FontAsset::Register(L"overDrive6", 6, L"GauFontOverDrive");
 
 	//ゲーム中で使うサウンドの用意
 	SoundAsset::Register(L"SE_Cursor", L"/3000");
@@ -136,6 +137,7 @@ void Main() {
 					}
 					void updatePlayer(); {
 						player.update();
+						player.update_UI();
 						player.move();
 						player.shot();
 					}
@@ -185,6 +187,7 @@ void Main() {
 					player.draw();
 				}
 				void drawEneBullet(); {
+				player.draw_UI();
 				}
 				void drawPlaBullet(); {
 					for (auto& b : manager.bullets) {
