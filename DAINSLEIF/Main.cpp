@@ -12,6 +12,7 @@ void Main() {
 	Scene gamemode = Scene::Title;
 	Cursor::SetStyle(CursorStyle::None);
 	Color cursorColor = Color(50, 205, 50, 210);
+	int fadeAlpha = 255;
 
 	// フォントファイルを一時的にインストール
 	//失敗した場合プログラムを終了する
@@ -73,6 +74,9 @@ void Main() {
 
 	while (System::Update()) {
 		void updateWindow(); {
+			if (fadeAlpha > 0) {
+				fadeAlpha -= 15;
+			}
 			//closeをクリックで閉じる
 			if (close.leftClicked) {
 				System::Exit();
@@ -112,6 +116,7 @@ void Main() {
 			for (int n = 0; n < buttons.size(); n++) {
 				auto newScene = buttons[n].update();
 				if (newScene != Scene::None) {
+					fadeAlpha = 255;
 					gamemode = newScene;
 				}
 				buttons[n].draw();
@@ -213,6 +218,7 @@ void Main() {
 		}
 		}
 		void drawWindowFrame(); {
+			Rect(0, 0, 800, 600).draw(Color(255, 255, 255, fadeAlpha));
 			rect.drawFrame(30, 0, Color(0, 0, 0));
 
 			if (menubarGrabbed == true) {
