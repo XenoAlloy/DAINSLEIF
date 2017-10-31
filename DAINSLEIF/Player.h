@@ -33,7 +33,7 @@ class Player {
 	Vec2 UI_position = { 100, 100 };
 
 	std::function<Vec2(const Bullet &)> bullets_move;
-	std::function<BulletShape(Vec2, float)> create_bullets_shape;
+	std::function<ShapePattern(Vec2, float)> create_bullets_shape;
 
 public:
 

@@ -1,7 +1,8 @@
 #pragma once
 #include <Siv3D.hpp>
+#include <unordered_map>
 
-class BulletShape : public Shape
+class ShapePattern : public Shape
 {
 	template<class Func>
 	auto resolve_shape(const Func& func) const {
@@ -12,18 +13,19 @@ class BulletShape : public Shape
 		}
 	}
 
-public:
-	static BulletShape circle(Vec2 position, float angle);
-	static BulletShape quad(Vec2 position, float angle);
 
+public:
 	template<class ShapeT>
-	BulletShape(ShapeT shape) : Shape(shape)
+	ShapePattern(ShapeT shape) : Shape(shape)
 	{
 	}
 
-	BulletShape(const BulletShape&) = default;
-	BulletShape(BulletShape&&) = default;
-	BulletShape& operator=(const BulletShape&) = default;
+	static const std::unordered_map<String, std::function<ShapePattern(Vec2, float)>> playerBulletShapes;
+
+
+	ShapePattern(const ShapePattern&) = default;
+	ShapePattern(ShapePattern&&) = default;
+	ShapePattern& operator=(const ShapePattern&) = default;
 
 	template<class ShapeT2>
 	bool intersects(const ShapeT2& other) const {

@@ -284,7 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletShape.hpp" />
+    <ClInclude Include="ShapePattern.hpp" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="MovePattern.hpp" />

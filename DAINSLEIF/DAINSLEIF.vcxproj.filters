@@ -431,10 +431,10 @@
     <ClInclude Include="Scene.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="BulletShape.hpp">
+    <ClInclude Include="UI_Button.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Button.h">
+    <ClInclude Include="ShapePattern.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

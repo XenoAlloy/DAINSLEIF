@@ -1,11 +1,11 @@
 # include "Player.h"
 # include "GameManager.h"
 # include "MovePattern.hpp"
-# include "BulletShape.hpp"
+# include "ShapePattern.hpp"
 
 Player::Player()
 	: position{ 400, 500 }
-	, create_bullets_shape(BulletShape::quad)
+	, create_bullets_shape(ShapePattern::playerBulletShapes.find(L"quad")->second)
 	, bullets_move{ MovePattern::straightForMouse<Bullet>(position) }
 	, velocity{} {
 }
@@ -142,12 +142,12 @@ void Player::update() {
 	direction = (Mouse::Pos() - position).normalize();
 	if (Input::KeyShift.pressed) {
 		speed = Speed::SLOWER;
-		create_bullets_shape = BulletShape::circle;
+		create_bullets_shape = ShapePattern::playerBulletShapes.find(L"quad")->second;
 		energy += 10;
 	}
 	else {
 		speed = Speed::HIGHER;
-		create_bullets_shape = BulletShape::quad;
+		create_bullets_shape = ShapePattern::playerBulletShapes.find(L"quad")->second;
 	}
 	energy += 5;
 	if (energy >= maxEnergy) {
