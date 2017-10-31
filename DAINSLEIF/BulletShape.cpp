@@ -18,3 +18,10 @@ const std::unordered_map<String, std::function<ShapePattern(Vec2, float)>> Shape
 		}
 	}
 };
+
+const std::unordered_map<String, std::function<ShapePattern(Vec2, float)>> ShapePattern::enemyShapes{
+	/* 敵の形状を3種追加する。
+	例
+	{ L"cuneate", [](auto position, auto angle) { return ShapePattern{ Quad( {- 楔形の頂点を列挙 -}) }}
+	*/
+};
