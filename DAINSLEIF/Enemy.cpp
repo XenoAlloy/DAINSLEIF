@@ -1,9 +1,9 @@
 # include "Enemy.h"
 # include "Player.h"
 
-Enemy::Enemy(Vec2 position, Vec2 velocity, std::function<Vec2(const Enemy&)> move_pattern)
+Enemy::Enemy(Vec2 position, Vec2 velocity, std::function<Vec2(const Enemy&)> move_pattern, std::function<ShapePattern(Vec2, float, float)> shape_creator)
 	: _move(move_pattern)
-	, shape(position, 50)
+	, shape(shape_creator(position, 0, 4))
 	, position(position)
 	, velocity(velocity) {
 }
@@ -37,7 +37,7 @@ const Vec2 & Enemy::get_velocity() const
 {
 	return velocity;
 }
-const Circle& Enemy::get_shape() const {
+const ShapePattern& Enemy::get_shape() const {
 	return shape;
 }
 const bool Enemy::killed()const {

@@ -59,7 +59,8 @@ void Main() {
 	Player player;
 	GameManager::get_instance().enemies.push_back(
 		Enemy({ 800, 100 }, { 4, 0 },
-			MovePattern::chase<Enemy>(player.get_position())
+			MovePattern::chase<Enemy>(player.get_position()),
+			ShapePattern::enemyShapes.find(L"wedge")->second
 		)
 	);
 	Array<UI_Button> buttons{

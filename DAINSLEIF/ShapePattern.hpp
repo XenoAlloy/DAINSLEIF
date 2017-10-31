@@ -8,6 +8,7 @@ class ShapePattern : public Shape {
 		switch (type()) {
 		case Shape::Type::Circle: return func(storage.circle);
 		case Shape::Type::Quad: return func(*(storage.quad));
+		case Shape::Type::Polygon: return func(*(storage.polygon));
 		default: throw std::invalid_argument("‘Î‰‚µ‚Ä‚¢‚È‚¢}Œ`‚ğˆµ‚¨‚¤‚Æ‚µ‚Ä‚¢‚Ü‚·B");
 		}
 	}
@@ -27,6 +28,6 @@ public:
 
 	template<class ShapeT2>
 	bool intersects(const ShapeT2& other) const {
-		return resolve_shape([&other](const auto& shape) { return shape.intersects(other); });
+		return resolve_shape([&other](const auto& shape) { return other.intersects(shape); });
 	}
 };
