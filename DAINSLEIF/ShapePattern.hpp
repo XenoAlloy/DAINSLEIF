@@ -2,8 +2,7 @@
 #include <Siv3D.hpp>
 #include <unordered_map>
 
-class ShapePattern : public Shape
-{
+class ShapePattern : public Shape {
 	template<class Func>
 	auto resolve_shape(const Func& func) const {
 		switch (type()) {
@@ -16,13 +15,11 @@ class ShapePattern : public Shape
 
 public:
 	template<class ShapeT>
-	ShapePattern(ShapeT shape) : Shape(shape)
-	{
+	ShapePattern(ShapeT shape) : Shape(shape) {
 	}
 
 	static const std::unordered_map<String, std::function<ShapePattern(Vec2, float)>> playerBulletShapes;
 	static const std::unordered_map<String, std::function<ShapePattern(Vec2, float, float)>> enemyShapes;
-
 
 	ShapePattern(const ShapePattern&) = default;
 	ShapePattern(ShapePattern&&) = default;

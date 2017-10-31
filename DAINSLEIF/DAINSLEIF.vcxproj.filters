@@ -93,10 +93,10 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="BulletShape.cpp">
+    <ClCompile Include="UI_Button.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Button.cpp">
+    <ClCompile Include="ShapePattern.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
