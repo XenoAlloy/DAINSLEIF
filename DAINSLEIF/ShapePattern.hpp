@@ -21,7 +21,7 @@ public:
 	}
 
 	static const std::unordered_map<String, std::function<ShapePattern(Vec2, float)>> playerBulletShapes;
-	static const std::unordered_map<String, std::function<ShapePattern(Vec2, float)>> enemyShapes;
+	static const std::unordered_map<String, std::function<ShapePattern(Vec2, float, float)>> enemyShapes;
 
 
 	ShapePattern(const ShapePattern&) = default;
