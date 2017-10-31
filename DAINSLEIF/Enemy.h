@@ -4,6 +4,7 @@ class Enemy {
 	int life = 10;
 	int power = 300;
 	Vec2 position;
+	Vec2 velocity;
 	int shapeType;
 	int bulletType;
 	int moveType;
@@ -12,7 +13,7 @@ class Enemy {
 
 public:
 
-	Enemy(/*Circle,*/std::function<Vec2(const Enemy&)>);
+	Enemy(Vec2, Vec2, std::function<Vec2(const Enemy&)>);
 	~Enemy();
 
 
@@ -23,6 +24,7 @@ public:
 	void damaged(int damage);
 
 	const Vec2 & get_position() const;
+	const Vec2 & get_velocity() const;
 	const Circle& get_shape() const;
 	const int get_power() const;
 	const bool killed()const;

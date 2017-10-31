@@ -58,7 +58,7 @@ void Main() {
 
 	Player player;
 	GameManager::get_instance().enemies.push_back(
-		Enemy(
+		Enemy({ 800, 100 }, { 4, 0 },
 			MovePattern::chase<Enemy>(player.get_position())
 		)
 	);
