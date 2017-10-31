@@ -40,6 +40,8 @@ public:
 	Player();
 	~Player();
 
+	void reset();
+
 	void update();
 	void update_UI();
 	void move();

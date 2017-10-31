@@ -119,6 +119,9 @@ void Main() {
 			for (int n = 0; n < buttons.size(); n++) {
 				auto newScene = buttons[n].update();
 				if (newScene != Scene::None) {
+					if (newScene == Scene::Stage) {
+						player.reset();
+					}
 					SoundAsset(L"BGM_Keybords Brawl Dance").stop(1.0s);
 					fadeAlpha = 255;
 					gamemode = newScene;

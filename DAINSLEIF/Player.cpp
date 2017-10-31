@@ -132,6 +132,11 @@ void Player::shot() {
 		}
 	}
 }
+void Player::reset() {
+	position = { 400,500 };
+	life = maxLife;
+	energy = maxEnergy;
+}
 void Player::update() {
 	shotCount += 1;
 	direction = (Mouse::Pos() - position).normalize();
