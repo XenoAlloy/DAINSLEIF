@@ -6,6 +6,13 @@
 class MovePattern {
 public:
 	template<class Moving>
+	static auto straight() {
+		return [](const Moving & m) {
+			return m.get_velocity();
+		};
+	}
+
+	template<class Moving>
 	static auto straightForMouse(const Vec2 & from) {
 		return[direction = Vec2(), &from](const Moving &) mutable->Vec2 {
 			if (direction.isZero()) {
@@ -19,7 +26,7 @@ public:
 	template<class Moving>
 	static auto chase(const Vec2 & target) {
 		return [&target](const Moving & m) mutable -> Vec2 {
-			return (target - m.get_position()).normalize() * 4;
+			return (target - m.get_position()).normalize() * m.get_velocity().length();
 		};
 	}
 
