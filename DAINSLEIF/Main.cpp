@@ -69,6 +69,10 @@ void Main() {
 		{ L"Credit", Vec2{ 80,440 }, Scene::Credits },
 		{ L"Exit", Vec2{ 80,500 }, Scene::Exit }
 	};
+	Array<UI_Button> pause{
+		{ L"Continue", Vec2{ 40, 520 - FontAsset(L"overDrive20").ascent }, Scene::Continue },
+		{ L"Quit", Vec2{ 40, 560 - FontAsset(L"overDrive20").ascent }, Scene::Title },
+	};
 
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
@@ -94,7 +98,7 @@ void Main() {
 				menubarGrabbed = true;
 				continueGame = false;
 			}
-			else if (Input::MouseL.released) {
+			else if (menubar.leftReleased) {
 				// マウスのクリックが離されたら離す
 				menubarGrabbed = false;
 				continueGame = true;
@@ -189,9 +193,6 @@ void Main() {
 				if (Input::KeyE.clicked) {
 					continueGame = false;
 				}
-				if (!continueGame) {
-					//ポーズ画面
-				}
 			}
 			void drawGame(); {
 				player.draw_UI();
@@ -204,6 +205,29 @@ void Main() {
 				}
 				//				testCircle.draw(Color(255, 0, 0, 80));
 			}
+			if (!continueGame) {
+				for (int n = 0; n < pause.size(); n++) {
+					auto newScene = pause[n].update();
+					if (newScene != Scene::None) {
+						if (newScene == Scene::Continue) {
+							continueGame = true;
+						}
+						if (newScene == Scene::Title) {
+							SoundAsset(L"BGM_Bustle of Ghosts").stop(1.0s);
+							fadeAlpha = 255;
+							gamemode = newScene;
+						}
+					}
+
+					if (Input::KeySpace.clicked) {
+						continueGame = true;
+					}
+					FontAsset(L"migMixR20")(L"PAUSE").draw({ 760 - FontAsset(L"migMixR20")(L"PAUSE").region().w, 40 }, Color(0, 0, 0));
+					pause[n].draw();
+				}
+				//ポーズ画面
+			}
+
 			break;
 		}
 

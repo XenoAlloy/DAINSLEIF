@@ -7,4 +7,5 @@ enum struct Scene {
 	Result,
 	Credits,
 	Exit,
+	Continue,
 };
