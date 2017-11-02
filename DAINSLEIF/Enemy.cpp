@@ -8,6 +8,13 @@ Enemy::Enemy(Vec2 position, Vec2 velocity, std::function<Vec2(const Enemy&)> mov
 	, velocity(velocity) {
 }
 
+Enemy::Enemy(Vec2 position, Vec2 velocity, std::function<Vec2(const Enemy&)> move_pattern, ShapePattern shape)
+	: _move(move_pattern)
+	, shape(shape)
+	, position(position)
+	, velocity(velocity) {
+}
+
 Enemy::~Enemy() {
 }
 

@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -186,6 +187,7 @@
     <Image Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DemoStage.csv" />
     <None Include="Engine\Assets\engine_textures.s3a" />
     <None Include="Engine\Config.ini" />
     <None Include="Engine\dll(x64)\D3D\d3dcompiler_47.dll" />
@@ -284,6 +286,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="ShapePattern.hpp" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />

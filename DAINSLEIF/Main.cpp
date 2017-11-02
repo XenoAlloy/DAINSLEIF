@@ -5,6 +5,8 @@
 # include "Enemy.h"
 # include "MovePattern.hpp"
 # include "GameManager.h"
+# include "EnemySpawner.h"
+
 void Main() {
 	Window::SetTitle(L"DAINSLEIF");
 	Window::Resize(800, 600);
@@ -56,13 +58,22 @@ void Main() {
 
 	bool continueGame = true;
 
+	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
+	GameManager&manager = GameManager::get_instance();
+
 	Player player;
-	GameManager::get_instance().enemies.push_back(
-		Enemy({ 800, 100 }, { 4, 0 },
-			MovePattern::chase<Enemy>(player.get_position()),
-			ShapePattern::enemyShapes.find(L"wedge")->second
-		)
-	);
+
+	EnemySpawner spawner{ L"DemoStage.csv", player.get_position() };
+
+	//GameManager::get_instance().enemies.push_back(
+	//	Enemy({ 800, 100 }, { 4, 0 },
+	//		MovePattern::chase<Enemy>(player.get_position()),
+	//		ShapePattern::enemyShapes.find(L"wedge")->second
+	//	)
+	//);
+
+
+
 	Array<UI_Button> buttons{
 		{ L"GameStart", Vec2{ 80,320 }, Scene::Stage },
 
@@ -73,9 +84,6 @@ void Main() {
 		{ L"Continue", Vec2{ 40, 520 - FontAsset(L"overDrive20").ascent }, Scene::Continue },
 		{ L"Quit", Vec2{ 40, 560 - FontAsset(L"overDrive20").ascent }, Scene::Title },
 	};
-
-	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
-	GameManager&manager = GameManager::get_instance();
 
 	//auto testCircle = Circle(Vec2(200, 200), 200);
 
@@ -126,6 +134,7 @@ void Main() {
 				if (newScene != Scene::None) {
 					if (newScene == Scene::Stage) {
 						player.reset();
+						spawner.start();
 					}
 					SoundAsset(L"BGM_Keybords Brawl Dance").stop(1.0s);
 					fadeAlpha = 255;
@@ -188,6 +197,10 @@ void Main() {
 					if (player.killed()) {
 						SoundAsset(L"BGM_Bustle of Ghosts").stop(2.0s);
 						gamemode = Scene::Result;
+					}
+
+					for (auto& e : spawner.sortie()) {
+						manager.enemies.emplace_back(e);
 					}
 				}
 				if (Input::KeyE.clicked) {

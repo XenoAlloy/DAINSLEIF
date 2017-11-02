@@ -1,6 +1,6 @@
 # pragma once
 # include <Siv3D.hpp>
-#include "ShapePattern.hpp"
+# include "ShapePattern.hpp"
 
 class Enemy {
 	int life = 10;
@@ -16,6 +16,7 @@ class Enemy {
 public:
 
 	Enemy(Vec2, Vec2, std::function<Vec2(const Enemy&)>, std::function<ShapePattern(Vec2, float, float)>);
+	Enemy(Vec2, Vec2, std::function<Vec2(const Enemy&)>, ShapePattern);
 	~Enemy();
 
 

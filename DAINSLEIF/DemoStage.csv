@@ -1,0 +1,10 @@
+When[sec],"Where{x,y}","Velocity{x,y}",Move,Shape,scale
+0,"{400,0}","{4,0}",chase,circle,10
+1.5,"{520,90}","{4,0}",chase,circle,10
+3,"{640,180}","{4,0}",chase,circle,10
+4.5,"{760,270}","{4,0}",chase,circle,10
+6,"{720,360}","{4,0}",chase,circle,10
+7,"{640,420}","{4,0}",chase,circle,10
+8,"{560,480}","{4,0}",chase,circle,10
+9,"{480,540}","{4,0}",chase,circle,10
+10,"{400,600}","{4,0}",chase,circle,10
