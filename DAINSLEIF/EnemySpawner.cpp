@@ -9,7 +9,7 @@ EnemySpawner::EnemySpawner(String csvPath, const Vec2& chaseTarget)
 		{L"chase", MovePattern::chase<Enemy>(chaseTarget)}
 	};
 
-	CSVReader reader{ csvPath };
+	CSVReader reader{ L"STAGE/" + csvPath };
 	if (!reader.isOpened()) {
 		throw std::ios_base::failure("CSVファイルの読み込みに失敗しました。");
 		return;
