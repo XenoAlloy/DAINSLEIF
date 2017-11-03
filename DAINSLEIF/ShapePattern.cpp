@@ -32,10 +32,10 @@ const std::unordered_map<String, std::function<ShapePattern(Vec2, float, float)>
 			[](auto position, auto angle, auto scale) {
 			return ShapePattern{
 				Quad{
-					{ position.x, position.y - 6 * scale },
-					{ position.x + 6 * scale, position.y },
-					{ position.x, position.y + 6 * scale },
-					{ position.x - 6 * scale, position.y }
+					{ position.x, position.y - 10 * scale },
+					{ position.x + 10 * scale, position.y },
+					{ position.x, position.y + 10 * scale },
+					{ position.x - 10 * scale, position.y }
 				}.rotatedAt(position, angle)
 			};
 		}
@@ -44,12 +44,12 @@ const std::unordered_map<String, std::function<ShapePattern(Vec2, float, float)>
 			[](auto position, auto angle, auto scale) {
 			return ShapePattern{
 				Polygon{
-					{ position.x, position.y - 6 * scale },
-					{ position.x + 6 * scale, position.y - 2 * scale },
-					{ position.x + 2 * scale, position.y },
-					{ position.x, position.y + 4 * scale },
-					{ position.x - 2 * scale, position.y },
-					{ position.x - 6 * scale, position.y - 2 * scale }
+					{ position.x, position.y - 12 * scale },
+					{ position.x + 12 * scale, position.y - 4 * scale },
+					{ position.x + 4 * scale, position.y },
+					{ position.x, position.y + 8 * scale },
+					{ position.x - 4 * scale, position.y },
+					{ position.x - 12 * scale, position.y - 4 * scale }
 				}.rotatedAt(position, angle)
 			};
 		}
