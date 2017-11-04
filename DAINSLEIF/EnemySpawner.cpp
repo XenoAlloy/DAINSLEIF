@@ -25,13 +25,13 @@ EnemySpawner::EnemySpawner(String csvPath, const Vec2& chaseTarget)
 		auto scale = reader.get<float>(i, 5);
 
 		auto movePattern = move_map[move_key];
-		auto angle = Atan2(velocity.y, velocity.x);
+		auto angle = Atan2(velocity.x, velocity.y);
 		auto shapePattern = ShapePattern::enemyShapes.find(shape_key)->second;
 		auto shape = shapePattern(position, angle, scale);
 		// 60fps‚ð‰¼’è
 		unsigned int time_frame = time_sec * 60 + 0.5;
 
-		timeLine.emplace_back(SpawnInfo{ time_frame, { position, velocity, movePattern, shape } });
+		timeLine.emplace_back(SpawnInfo{ time_frame, { position, velocity, movePattern, shape, angle } });
 	}
 }
 

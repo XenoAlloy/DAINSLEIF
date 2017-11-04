@@ -5,14 +5,16 @@ Enemy::Enemy(Vec2 position, Vec2 velocity, std::function<Vec2(const Enemy&)> mov
 	: _move(move_pattern)
 	, shape(shape_creator(position, 0, 4))
 	, position(position)
-	, velocity(velocity) {
+	, velocity(velocity)
+	, angle(0) {
 }
 
-Enemy::Enemy(Vec2 position, Vec2 velocity, std::function<Vec2(const Enemy&)> move_pattern, ShapePattern shape)
+Enemy::Enemy(Vec2 position, Vec2 velocity, std::function<Vec2(const Enemy&)> move_pattern, ShapePattern shape, double angle)
 	: _move(move_pattern)
 	, shape(shape)
 	, position(position)
-	, velocity(velocity) {
+	, velocity(velocity)
+	, angle(angle) {
 }
 
 Enemy::~Enemy() {
@@ -26,6 +28,11 @@ void Enemy::move() {
 	auto distance = _move(*this);
 	position += distance;
 	shape.moveBy(distance);
+
+	auto newAngle = Atan2(distance.x, distance.y);
+	shape.rotateAt(position, angle - newAngle);
+
+	angle = newAngle;
 }
 
 void Enemy::draw() {

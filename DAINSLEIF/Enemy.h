@@ -7,6 +7,7 @@ class Enemy {
 	int power = 300;
 	Vec2 position;
 	Vec2 velocity;
+	double angle;
 	int shapeType;
 	int bulletType;
 	int moveType;
@@ -16,7 +17,7 @@ class Enemy {
 public:
 
 	Enemy(Vec2, Vec2, std::function<Vec2(const Enemy&)>, std::function<ShapePattern(Vec2, float, float)>);
-	Enemy(Vec2, Vec2, std::function<Vec2(const Enemy&)>, ShapePattern);
+	Enemy(Vec2, Vec2, std::function<Vec2(const Enemy&)>, ShapePattern, double);
 	~Enemy();
 
 
