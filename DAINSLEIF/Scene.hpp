@@ -8,4 +8,5 @@ enum struct Scene {
 	Credits,
 	Exit,
 	Continue,
+	Controls,
 };

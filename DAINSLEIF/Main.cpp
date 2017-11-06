@@ -76,7 +76,7 @@ void Main() {
 
 	Array<UI_Button> buttons{
 		{ L"GameStart", Vec2{ 80,320 }, Scene::Stage },
-
+		{ L"Controls", Vec2{ 80,380 }, Scene::Controls },
 		{ L"Credit", Vec2{ 80,440 }, Scene::Credits },
 		{ L"Exit", Vec2{ 80,500 }, Scene::Exit }
 	};
@@ -126,8 +126,9 @@ void Main() {
 			SoundAsset(L"BGM_Keybords Brawl Dance").play();
 			title.draw(40, 100);
 
-			FontAsset(L"whiteBase10")(L"ver.0.0.1").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
-			FontAsset(L"migMixB20")(L"α").draw(720, 250 - FontAsset(L"migMixB20").ascent, Color(0, 0, 0));
+			//FontAsset(L"whiteBase10")(L"ver.0.0.1").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
+			//FontAsset(L"migMixB20")(L"α").draw(720, 250 - FontAsset(L"migMixB20").ascent, Color(0, 0, 0));
+			FontAsset(L"whiteBase10")(L"DEMOver").draw(600, 250 - FontAsset(L"whiteBase10").ascent, Color(0, 0, 0));
 
 			for (int n = 0; n < buttons.size(); n++) {
 				auto newScene = buttons[n].update();
@@ -260,7 +261,24 @@ void Main() {
 		}
 
 		case Scene::Credits: {
-			FontAsset(L"migMixR20")(L"DAINSLEIF\n企画 Xenon\n制作 Xenon いるやん\nBGM DIG\nSE Xenon\n\n\n\n\n\n\n\nTHANK YOU FOR PLAYING!!").draw(40, 40, Color(0, 0, 0));
+			FontAsset(L"migMixR20")(L"DAINSLEIF\n企画 Xenon\n制作 Xenon いるやん\nBGM DIG\nSE Xenon\nデモステージ編集 alpaca\n\n\n\n\n\n\nTHANK YOU FOR PLAYING!!").draw(40, 40, Color(0, 0, 0));
+			if (Input::MouseL.clicked) {
+				fadeAlpha = 255;
+				gamemode = Scene::Title;
+			}
+			break;
+		}
+
+		case Scene::Controls: {
+			player.set_position({ 600,150 });
+			player.set_direction({ 0,0 });
+			player.draw();
+			FontAsset(L"overDrive20")(L"player").drawCenter(600, 100, Color(0, 0, 0));
+			Quad{ { 520, 450 - 20 },{ 520 + 20, 450 },{ 520, 450 + 20 },{ 520 - 20, 450 } }.draw(Color(255, 0, 0));
+			Circle(600, 450, 20).draw(Color(255, 0, 0));
+			Polygon{ { 680, 450 - 24 },{ 680 + 24, 450 - 8 },{ 680 + 8, 450 },{ 680, 450 + 16 },{ 680 - 8,450 },{ 680 - 24, 450 - 8 } }.draw(Color(255, 0, 0));
+			FontAsset(L"overDrive20")(L"enemies").drawCenter(600, 500, Color(0, 0, 0));
+			FontAsset(L"migMixR20")(L"操作方法\n移動 … W,A,S,D キー\n照準 … マウスカーソル\n射撃 … マウス左クリック\n回復 … Shift キー\n\n\n\n\n\n\n\n").draw(40, 40, Color(0, 0, 0));
 			if (Input::MouseL.clicked) {
 				fadeAlpha = 255;
 				gamemode = Scene::Title;
