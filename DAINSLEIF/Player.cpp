@@ -133,9 +133,9 @@ void Player::shot() {
 	}
 }
 void Player::reset() {
-	position = { 400,500 };
 	life = maxLife;
 	energy = maxEnergy;
+	velocity = { 0,0 };
 }
 void Player::update() {
 	shotCount += 1;
@@ -185,4 +185,11 @@ const Circle Player::get_shape() const {
 }
 const int Player::get_power()const {
 	return power;
+}
+
+void Player::set_position(Vec2 pos) {
+	position = pos;
+}
+void Player::set_direction(Vec2 dir) {
+	direction = dir;
 }

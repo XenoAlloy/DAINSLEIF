@@ -56,4 +56,7 @@ public:
 	const Circle get_shape() const;
 	const int get_power() const;
 	const bool killed() const;
+
+	void set_position(Vec2);
+	void set_direction(Vec2);
 };

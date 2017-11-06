@@ -133,7 +133,18 @@ void Main() {
 				auto newScene = buttons[n].update();
 				if (newScene != Scene::None) {
 					if (newScene == Scene::Stage) {
+						{auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
+							[](const Bullet& b) -> bool { return !b.killed(); });
+						manager.bullets.erase(remove_ptr, manager.bullets.end());
+						}
+						{auto remove_ptr = std::remove_if(manager.enemies.begin(), manager.enemies.end(),
+							[](const Enemy& e) -> bool { return !e.killed(); });
+						manager.enemies.erase(remove_ptr, manager.enemies.end());
+						}
 						player.reset();
+						player.set_position({ 400, 500 });
+						player.set_direction({ 0,-1 });
+						continueGame = true;
 						spawner.start();
 					}
 					SoundAsset(L"BGM_Keybords Brawl Dance").stop(1.0s);
