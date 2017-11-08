@@ -22,5 +22,6 @@ public:
 
 	void start();
 	Array<Enemy> sortie();
+	bool empty();
 };
 

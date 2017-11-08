@@ -56,3 +56,8 @@ Array<Enemy> EnemySpawner::sortie() {
 
 	return enemies;
 }
+
+bool EnemySpawner::empty()
+{
+	return current_it == timeLine.end();
+}

@@ -12,6 +12,8 @@ void Main() {
 	Window::Resize(800, 600);
 	Window::SetStyle(WindowStyle::NonFrame);
 	Scene gamemode = Scene::Title;
+	EventTimer gameEndClock;
+	gameEndClock.addEvent(L"GameEnd", 3.0s);
 	Cursor::SetStyle(CursorStyle::None);
 	Color cursorColor = Color(50, 205, 50, 210);
 	int fadeAlpha = 255;
@@ -147,6 +149,9 @@ void Main() {
 						player.set_direction({ 0,-1 });
 						continueGame = true;
 						spawner.start();
+						gameEndClock.reset();
+						SoundAsset(L"BGM_Bustle of Ghosts").setVolume(0.1);
+						SoundAsset(L"BGM_Bustle of Ghosts").play();
 					}
 					SoundAsset(L"BGM_Keybords Brawl Dance").stop(1.0s);
 					fadeAlpha = 255;
@@ -162,8 +167,6 @@ void Main() {
 		}
 
 		case Scene::Stage: {
-			SoundAsset(L"BGM_Bustle of Ghosts").setVolume(0.1);
-			SoundAsset(L"BGM_Bustle of Ghosts").play();
 			void updateGame(); {
 				if (continueGame) {
 					//update_player
@@ -213,6 +216,17 @@ void Main() {
 
 					for (auto& e : spawner.sortie()) {
 						manager.enemies.emplace_back(e);
+					}
+					// ゲームクリア判定
+					if (spawner.empty() && manager.enemies.empty()) {
+						if (!gameEndClock.isActive()) {
+							SoundAsset(L"BGM_Bustle of Ghosts").stop(2.0s);
+							gameEndClock.start();
+						}
+						gameEndClock.update();
+						if (gameEndClock.onTriggered(L"GameEnd")) {
+							gamemode = Scene::Result;
+						}
 					}
 				}
 				if (Input::KeyE.clicked) {
