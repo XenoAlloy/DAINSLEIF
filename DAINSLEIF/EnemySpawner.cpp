@@ -2,8 +2,7 @@
 # include "MovePattern.hpp"
 # include "ShapePattern.hpp"
 
-EnemySpawner::EnemySpawner(String csvPath, const Vec2& chaseTarget)
-{
+EnemySpawner::EnemySpawner(String csvPath, const Vec2& chaseTarget) {
 	static std::unordered_map < String, std::function<Vec2(const Enemy &)>> move_map{
 		{L"straight", MovePattern::straight<Enemy>()},
 		{L"chase", MovePattern::chase<Enemy>(chaseTarget)}
@@ -36,8 +35,7 @@ EnemySpawner::EnemySpawner(String csvPath, const Vec2& chaseTarget)
 }
 
 
-EnemySpawner::~EnemySpawner()
-{
+EnemySpawner::~EnemySpawner() {
 }
 
 /// sortieを呼び出す前に呼び出しておくこと。

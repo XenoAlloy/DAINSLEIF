@@ -1,6 +1,6 @@
-#pragma once
-#include "Bullet.h"
-#include "Enemy.h"
+# pragma once
+# include "Bullet.h"
+# include "Enemy.h"
 
 class GameManager {
 private:
