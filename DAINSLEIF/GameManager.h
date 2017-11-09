@@ -1,6 +1,7 @@
 # pragma once
 # include "Bullet.h"
 # include "Enemy.h"
+# include "SpawnNotice.h"
 
 class GameManager {
 private:
@@ -10,6 +11,7 @@ private:
 public:
 	Array<Bullet> bullets;
 	Array<Enemy> enemies;
+	Array<SpawnNotice> notifications;
 	int score;
 
 	GameManager(const GameManager&) = delete;

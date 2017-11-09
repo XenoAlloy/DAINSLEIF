@@ -60,7 +60,7 @@ void Main() {
 
 	//GameManagerが一つであることの証明、毎回取らなくていいようにキープ
 	GameManager&manager = GameManager::get_instance();
-
+	Effect effects;
 	Player player;
 
 	EnemySpawner spawner{ L"DemoStage.csv", player.get_position() };
@@ -142,6 +142,10 @@ void Main() {
 							[](const Enemy& e) -> bool { return !e.killed(); });
 						manager.enemies.erase(remove_ptr, manager.enemies.end());
 						}
+						{auto remove_ptr = std::remove_if(manager.notifications.begin(), manager.notifications.end(),
+							[](const SpawnNotice& n) -> bool { return !n.killed(); });
+						manager.notifications.erase(remove_ptr, manager.notifications.end());
+						}
 						player.reset();
 						player.set_position({ 400, 500 });
 						player.set_direction({ 0,-1 });
@@ -181,6 +185,9 @@ void Main() {
 					for (auto& b : manager.bullets) {
 						b.update();
 					}
+					for (auto& n : manager.notifications) {
+						n.draw();
+					}
 					//check_collision
 						/*	auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
 								[&testCircle](const Bullet& b) -> bool { return b.get_shape().intersects(testCircle); });
@@ -206,6 +213,10 @@ void Main() {
 						[](const Enemy& e) -> bool { return e.killed(); });
 					manager.enemies.erase(remove_ptr, manager.enemies.end());
 					}
+					{auto remove_ptr = std::remove_if(manager.notifications.begin(), manager.notifications.end(),
+						[](const SpawnNotice& n) -> bool { return n.killed(); });
+					manager.notifications.erase(remove_ptr, manager.notifications.end());
+					}
 					if (player.killed()) {
 						SoundAsset(L"BGM_Bustle of Ghosts").stop(2.0s);
 						gamemode = Scene::Result;
@@ -213,6 +224,9 @@ void Main() {
 
 					for (auto& e : spawner.sortie()) {
 						manager.enemies.emplace_back(e);
+					}
+					for (auto& n : spawner.notify()) {
+						manager.notifications.emplace_back(n);
 					}
 				}
 				if (Input::KeyE.clicked) {
@@ -303,7 +317,8 @@ void Main() {
 			Line(778, 8, 792, 22).draw(2);
 			Line(792, 8, 778, 22).draw(2);
 
-			FontAsset(L"migMixR10")(player.get_position()).draw();
+			//FontAsset(L"migMixR10")(player.get_position()).draw();
+			//FontAsset(L"migMixR10")(Profiler::FPS()).draw();
 		}
 
 		void drawMouseCursor(); {

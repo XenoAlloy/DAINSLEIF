@@ -27,6 +27,7 @@ public:
 	void shot();
 	void damaged(int damage);
 
+	//const int get
 	const Vec2 & get_position() const;
 	const Vec2 & get_velocity() const;
 	const ShapePattern& get_shape() const;

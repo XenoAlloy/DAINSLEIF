@@ -1,6 +1,7 @@
 # pragma once
 # include<Siv3D.hpp>
 # include "Enemy.h"
+# include "SpawnNotice.h"
 
 class EnemySpawner
 {
@@ -13,6 +14,7 @@ public:
 private:
 	unsigned int startFrame;
 	Array<SpawnInfo>::iterator current_it;
+	Array<SpawnInfo>::iterator current_notice;
 
 public:
 	Array<SpawnInfo> timeLine;
@@ -22,5 +24,6 @@ public:
 
 	void start();
 	Array<Enemy> sortie();
+	Array<SpawnNotice> notify();
 };
 

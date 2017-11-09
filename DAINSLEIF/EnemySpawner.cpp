@@ -42,6 +42,7 @@ EnemySpawner::~EnemySpawner() {
 void EnemySpawner::start() {
 	startFrame = System::FrameCount();
 	current_it = timeLine.begin();
+	current_notice = timeLine.begin();
 }
 
 Array<Enemy> EnemySpawner::sortie() {
@@ -53,4 +54,19 @@ Array<Enemy> EnemySpawner::sortie() {
 	}
 
 	return enemies;
+}
+Array<SpawnNotice> EnemySpawner::notify() {
+	Array<SpawnNotice> notifications;
+	auto frameCount = System::FrameCount() - startFrame + 60;
+
+	//scvファイルに記されたエネミーのpositionとscaleを読み配列に追加する
+	/*for (; current_it != timeLine.end() && current_it->time_frame <= frameCount; current_it++) {
+		notifications.emplace_back(current_it->enemy.get_position()//hogehoge);
+	}*/
+
+	for (; current_notice != timeLine.end() && current_notice->time_frame <= frameCount; current_notice++) {
+		notifications.emplace_back(current_it->enemy.get_position, 4);
+	}
+
+	return notifications;
 }
