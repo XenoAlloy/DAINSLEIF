@@ -10,6 +10,8 @@ private:
 public:
 	Array<Bullet> bullets;
 	Array<Enemy> enemies;
+	Effect effect;
+
 	int score;
 
 	GameManager(const GameManager&) = delete;

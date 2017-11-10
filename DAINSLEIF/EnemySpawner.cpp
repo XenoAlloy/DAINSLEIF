@@ -1,6 +1,8 @@
 # include "EnemySpawner.h"
 # include "MovePattern.hpp"
 # include "ShapePattern.hpp"
+# include "GameManager.h"
+# include "EnemyAlert.h"
 
 EnemySpawner::EnemySpawner(String csvPath, const Vec2& chaseTarget) {
 	static std::unordered_map < String, std::function<Vec2(const Enemy &)>> move_map{
@@ -30,7 +32,7 @@ EnemySpawner::EnemySpawner(String csvPath, const Vec2& chaseTarget) {
 		// 60fps‚ð‰¼’è
 		unsigned int time_frame = time_sec * 60 + 0.5;
 
-		timeLine.emplace_back(SpawnInfo{ time_frame, { position, velocity, movePattern, shape, angle } });
+		timeLine.emplace_back(SpawnInfo{ time_frame, { position, velocity, movePattern, shape, angle }, scale });
 	}
 }
 
@@ -44,13 +46,12 @@ void EnemySpawner::start() {
 	current_it = timeLine.begin();
 }
 
-Array<Enemy> EnemySpawner::sortie() {
-	Array<Enemy> enemies;
+void EnemySpawner::sortie() {
+	static GameManager& manager = GameManager::get_instance();
+
 	auto frameCount = System::FrameCount() - startFrame;
 
 	for (; current_it != timeLine.end() && current_it->time_frame <= frameCount; current_it++) {
-		enemies.emplace_back(current_it->enemy);
+		manager.effect.add<EnemyAlert>(current_it->enemy, current_it->scale);
 	}
-
-	return enemies;
 }
