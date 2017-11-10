@@ -211,7 +211,7 @@ void Main() {
 							manager.enemies.begin(), manager.enemies.end(),
 							[](const Enemy& e) -> bool { return e.killed(); });
 
-						for (auto& it = remove_ptr; it != manager.enemies.end(); it++) {
+						for (auto it = remove_ptr; it != manager.enemies.end(); it++) {
 							manager.score += it->get_score();
 						}
 						manager.enemies.erase(remove_ptr, manager.enemies.end());
