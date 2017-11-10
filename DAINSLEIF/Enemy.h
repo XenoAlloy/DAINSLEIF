@@ -34,5 +34,6 @@ public:
 	const int get_power() const;
 	const int get_score() const;
 	const bool killed()const;
+	const bool outOfWindow() const;
 };
 

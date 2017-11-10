@@ -55,7 +55,10 @@ const ShapePattern& Enemy::get_shape() const {
 	return shape;
 }
 const bool Enemy::killed()const {
-	return life <= 0 || !shape.intersects(Window::ClientRect());
+	return life <= 0;
+}
+const bool Enemy::outOfWindow() const {
+	return !shape.intersects(Window::ClientRect());
 }
 const int Enemy::get_power() const {
 	return power;

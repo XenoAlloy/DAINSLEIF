@@ -216,6 +216,12 @@ void Main() {
 						}
 						manager.enemies.erase(remove_ptr, manager.enemies.end());
 					}
+					{
+						auto remove_ptr = std::remove_if(
+							manager.enemies.begin(), manager.enemies.end(),
+							[](const Enemy& e) -> bool { return e.outOfWindow(); });
+						manager.enemies.erase(remove_ptr, manager.enemies.end());
+					}
 					if (player.killed()) {
 						SoundAsset(L"BGM_Bustle of Ghosts").stop(2.0s);
 						gamemode = Scene::Result;
