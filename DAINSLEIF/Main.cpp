@@ -17,6 +17,7 @@ void Main() {
 	Cursor::SetStyle(CursorStyle::None);
 	Color cursorColor = Color(50, 205, 50, 210);
 	int fadeAlpha = 255;
+	String rank;
 
 	// フォントファイルを一時的にインストール
 	//失敗した場合プログラムを終了する
@@ -148,6 +149,7 @@ void Main() {
 						player.set_position({ 400, 500 });
 						player.set_direction({ 0,-1 });
 						continueGame = true;
+						manager.score = 0;
 						spawner.start();
 						gameEndClock.reset();
 						SoundAsset(L"BGM_Bustle of Ghosts").setVolume(0.1);
@@ -191,7 +193,7 @@ void Main() {
 						*/
 					for (auto& e : manager.enemies) {
 						if (e.get_shape().intersects(player.get_shape())) {
-							player.damaged(e.get_power());
+							manager.score -= 2 * player.damaged(e.get_power());
 							e.damaged(player.get_power());
 						}
 						for (auto& b : manager.bullets) {
@@ -201,13 +203,18 @@ void Main() {
 							}
 						}
 					}
-					{auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(),
-						[](const Bullet& b) -> bool { return b.killed(); });
+					{auto remove_ptr = std::remove_if(manager.bullets.begin(), manager.bullets.end(), [](const Bullet& b) -> bool { return b.killed(); });
 					manager.bullets.erase(remove_ptr, manager.bullets.end());
 					}
-					{auto remove_ptr = std::remove_if(manager.enemies.begin(), manager.enemies.end(),
-						[](const Enemy& e) -> bool { return e.killed(); });
-					manager.enemies.erase(remove_ptr, manager.enemies.end());
+					{
+						auto remove_ptr = std::remove_if(
+							manager.enemies.begin(), manager.enemies.end(),
+							[](const Enemy& e) -> bool { return e.killed(); });
+
+						for (auto& it = remove_ptr; it != manager.enemies.end(); it++) {
+							manager.score += it->get_score();
+						}
+						manager.enemies.erase(remove_ptr, manager.enemies.end());
 					}
 					if (player.killed()) {
 						SoundAsset(L"BGM_Bustle of Ghosts").stop(2.0s);
@@ -224,6 +231,7 @@ void Main() {
 						}
 						gameEndClock.update();
 						if (gameEndClock.onTriggered(L"GameEnd")) {
+							fadeAlpha = 255;
 							gamemode = Scene::Result;
 						}
 					}
@@ -238,6 +246,7 @@ void Main() {
 			}
 
 			void drawGame(); {
+				FontAsset(L"overDrive10")(L"SCORE:", manager.score).draw({ 40, 560 - FontAsset(L"overDrive10").ascent }, Color(0, 0, 0));
 				player.draw_UI();
 				player.draw();
 				for (auto& e : manager.enemies) {
@@ -275,11 +284,37 @@ void Main() {
 		}
 
 		case Scene::Result: {
+			FontAsset(L"whiteBase20")(L"Score : ", manager.score).draw(40, 60 - FontAsset(L"whiteBase20").ascent, Color(0, 0, 0));
+			FontAsset(L"whiteBase20")(L"Life   : ", player.get_life()).draw(40, 120 - FontAsset(L"whiteBase20").ascent, Color(0, 0, 0));
+			if (manager.score + manager.score*player.get_life() / 12000 <= 5000) {
+				rank = L"D";
+			}
+			if (manager.score + manager.score*player.get_life() / 12000 > 5000) {
+				rank = L"C";
+			}
+			if (manager.score + manager.score*player.get_life() / 12000 > 10000) {
+				rank = L"B";
+			}
+			if (manager.score + manager.score*player.get_life() / 12000 > 50000) {
+				rank = L"A";
+			}
+			if (manager.score + manager.score*player.get_life() / 12000 > 100000) {
+				rank = L"S";
+			}
 
+
+			FontAsset(L"whiteBase20")(L"Rank  : ", rank).draw(40, 240 - FontAsset(L"whiteBase20").ascent, Color(0, 0, 0));
+
+
+			if (Input::MouseL.clicked) {
+				fadeAlpha = 255;
+				gamemode = Scene::Title;
+			}
+			break;
 		}
 
 		case Scene::Credits: {
-			FontAsset(L"migMixR20")(L"DAINSLEIF\n企画 Xenon\n制作 Xenon いるやん\nBGM DIG\nSE Xenon\nデモステージ編集 alpaca\n\n\n\n\n\n\nTHANK YOU FOR PLAYING!!").draw(40, 40, Color(0, 0, 0));
+			FontAsset(L"migMixR20")(L"DAINSLEIF\n企画 Xenon\n制作 Xenon いるやん\nBGM DIG\nSE(カーソル音だけだよ☆) Xenon\nデモステージ編集 alpaca\n使用ライブラリ Siv3D\nSE提供 「効果音ラボ」様\n\n\n\n\nTHANK YOU FOR PLAYING!!").draw(40, 40, Color(0, 0, 0));
 			if (Input::MouseL.clicked) {
 				fadeAlpha = 255;
 				gamemode = Scene::Title;

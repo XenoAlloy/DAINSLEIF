@@ -157,7 +157,7 @@ void Player::update() {
 void Player::update_UI() {
 
 }
-void Player::damaged(int damage) {
+int Player::damaged(int damage) {
 	life -= damage;
 	if ((double)life / maxLife <= 0.20) {
 		SoundAsset(L"SE_Warning").setVolume(0, 4);
@@ -167,6 +167,7 @@ void Player::damaged(int damage) {
 		SoundAsset(L"SE_Death").setVolume(0, 4);
 		SoundAsset(L"SE_Death").play();
 	}
+	return damage;
 }
 const bool Player::killed() const {
 	return life <= 0;
@@ -185,6 +186,9 @@ const Circle Player::get_shape() const {
 }
 const int Player::get_power()const {
 	return power;
+}
+const int Player::get_life()const {
+	return life;
 }
 
 void Player::set_position(Vec2 pos) {

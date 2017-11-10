@@ -13,6 +13,7 @@ class Enemy {
 	int moveType;
 	std::function<Vec2(const Enemy &)> _move;
 	ShapePattern shape;
+	int score = 100;
 
 public:
 
@@ -31,6 +32,7 @@ public:
 	const Vec2 & get_velocity() const;
 	const ShapePattern& get_shape() const;
 	const int get_power() const;
+	const int get_score() const;
 	const bool killed()const;
 };
 
