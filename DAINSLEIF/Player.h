@@ -48,13 +48,14 @@ public:
 	void draw();
 	void draw_UI();
 	void shot();
-	void damaged(int damage);
+	int damaged(int damage);
 
 	const Vec2& get_position() const;
 	const Vec2& get_direction() const;
 	const double get_atan2() const;
 	const Circle get_shape() const;
 	const int get_power() const;
+	const int get_life() const;
 	const bool killed() const;
 
 	void set_position(Vec2);

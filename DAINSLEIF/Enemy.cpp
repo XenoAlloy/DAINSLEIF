@@ -22,6 +22,7 @@ Enemy::~Enemy() {
 
 
 void Enemy::update() {
+	score += 1;
 }
 
 void Enemy::move() {
@@ -47,16 +48,21 @@ void Enemy::damaged(int damage) {
 const Vec2 & Enemy::get_position() const {
 	return position;
 }
-const Vec2 & Enemy::get_velocity() const
-{
+const Vec2 & Enemy::get_velocity() const {
 	return velocity;
 }
 const ShapePattern& Enemy::get_shape() const {
 	return shape;
 }
 const bool Enemy::killed()const {
-	return life <= 0 || !shape.intersects(Window::ClientRect());
+	return life <= 0;
+}
+const bool Enemy::outOfWindow() const {
+	return !shape.intersects(Window::ClientRect());
 }
 const int Enemy::get_power() const {
 	return power;
+}
+const int Enemy::get_score() const {
+	return score;
 }
