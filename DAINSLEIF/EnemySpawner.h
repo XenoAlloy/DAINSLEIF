@@ -22,6 +22,7 @@ public:
 	~EnemySpawner();
 
 	void start();
+	bool empty();
 	void sortie();
 };
 

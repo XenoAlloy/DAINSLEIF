@@ -55,3 +55,8 @@ void EnemySpawner::sortie() {
 		manager.effect.add<EnemyAlert>(current_it->enemy, current_it->scale);
 	}
 }
+
+bool EnemySpawner::empty()
+{
+	return current_it == timeLine.end();
+}
