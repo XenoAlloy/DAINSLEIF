@@ -8,6 +8,7 @@ public:
 	struct SpawnInfo {
 		unsigned int time_frame;
 		Enemy enemy;
+		float scale;
 	};
 
 private:
@@ -21,7 +22,7 @@ public:
 	~EnemySpawner();
 
 	void start();
-	Array<Enemy> sortie();
 	bool empty();
+	void sortie();
 };
 

@@ -27,7 +27,7 @@ void Bullet::damaged() {
 }
 
 const bool Bullet::killed()const {
-	return life <= 0;
+	return life <= 0 || !shape.intersects(Window::ClientRect());
 }
 
 const double Bullet::get_angle() const {

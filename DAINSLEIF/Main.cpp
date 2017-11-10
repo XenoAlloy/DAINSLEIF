@@ -214,9 +214,8 @@ void Main() {
 						gamemode = Scene::Result;
 					}
 
-					for (auto& e : spawner.sortie()) {
-						manager.enemies.emplace_back(e);
-					}
+					spawner.sortie();
+
 					// ゲームクリア判定
 					if (spawner.empty() && manager.enemies.empty()) {
 						if (!gameEndClock.isActive()) {
@@ -233,6 +232,11 @@ void Main() {
 					continueGame = false;
 				}
 			}
+
+			void processEffect(); {
+				manager.effect.update();
+			}
+
 			void drawGame(); {
 				player.draw_UI();
 				player.draw();
@@ -317,7 +321,8 @@ void Main() {
 			Line(778, 8, 792, 22).draw(2);
 			Line(792, 8, 778, 22).draw(2);
 
-			FontAsset(L"migMixR10")(player.get_position()).draw();
+			//FontAsset(L"migMixR10")(player.get_position()).draw();
+			//FontAsset(L"migMixR10")(Profiler::FPS()).draw();
 		}
 
 		void drawMouseCursor(); {
