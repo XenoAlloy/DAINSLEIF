@@ -242,13 +242,15 @@ void Main() {
 						}
 					}
 				}
-				if (Input::KeyE.clicked) {
-					continueGame = false;
-				}
 			}
 
 			void processEffect(); {
 				manager.effect.update();
+			}
+
+			if (Input::KeyE.clicked) {
+				continueGame = false;
+				manager.effect.pause();
 			}
 
 			void drawGame(); {
@@ -269,6 +271,7 @@ void Main() {
 					if (newScene != Scene::None) {
 						if (newScene == Scene::Continue) {
 							continueGame = true;
+							manager.effect.resume();
 						}
 						if (newScene == Scene::Title) {
 							SoundAsset(L"BGM_Bustle of Ghosts").stop(1.0s);
@@ -279,6 +282,7 @@ void Main() {
 
 					if (Input::KeySpace.clicked) {
 						continueGame = true;
+						manager.effect.resume();
 					}
 					FontAsset(L"migMixR20")(L"PAUSE").draw({ 760 - FontAsset(L"migMixR20")(L"PAUSE").region().w, 40 }, Color(0, 0, 0));
 					pause[n].draw();
@@ -337,7 +341,7 @@ void Main() {
 			Circle(600, 450, 20).draw(Color(255, 0, 0));
 			Polygon{ { 680, 450 - 24 },{ 680 + 24, 450 - 8 },{ 680 + 8, 450 },{ 680, 450 + 16 },{ 680 - 8,450 },{ 680 - 24, 450 - 8 } }.draw(Color(255, 0, 0));
 			FontAsset(L"overDrive20")(L"enemies").drawCenter(600, 500, Color(0, 0, 0));
-			FontAsset(L"migMixR20")(L"操作方法\n移動 … W,A,S,D キー\n照準 … マウスカーソル\n射撃 … マウス左クリック\n回復 … Shift キー\n\n\n\n\n\n\n\n").draw(40, 40, Color(0, 0, 0));
+			FontAsset(L"migMixR20")(L"操作方法\n移動 … W,A,S,D キー\n照準 … マウスカーソル\n射撃 … マウス左クリック\n回復 … Shift キー\nポーズメニュー … E キー\nポーズメニュー復帰 … Space キー\n\n\n\n\n\n").draw(40, 40, Color(0, 0, 0));
 			if (Input::MouseL.clicked) {
 				fadeAlpha = 255;
 				gamemode = Scene::Title;

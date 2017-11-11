@@ -12,7 +12,7 @@ public:
 	};
 
 private:
-	unsigned int startFrame;
+	unsigned int frameCount;
 	Array<SpawnInfo>::iterator current_it;
 
 public:

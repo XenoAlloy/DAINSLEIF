@@ -42,14 +42,14 @@ EnemySpawner::~EnemySpawner() {
 
 /// sortieを呼び出す前に呼び出しておくこと。
 void EnemySpawner::start() {
-	startFrame = System::FrameCount();
+	frameCount = 0;
 	current_it = timeLine.begin();
 }
 
 void EnemySpawner::sortie() {
 	static GameManager& manager = GameManager::get_instance();
 
-	auto frameCount = System::FrameCount() - startFrame;
+	frameCount++;
 
 	for (; current_it != timeLine.end() && current_it->time_frame <= frameCount; current_it++) {
 		manager.effect.add<EnemyAlert>(current_it->enemy, current_it->scale);
